@@ -37,17 +37,8 @@ public class Board : MonoBehaviour
 
     private GameObject GenerateObj(Vector3 position, string name)
     {
-        GameObject tileObject;
-
-        if (position.x % 2 == 0)
-        {
-            tileObject = Instantiate(this._tileRedPrefab, position, Quaternion.identity, this.transform);
-        }
-        else
-        {
-            tileObject = Instantiate(this._tileBluePrefab, position, Quaternion.identity, this.transform);
-        }
-
+        bool paintRed = (position.x % 2) == (position.y % 2);
+        GameObject tileObject = Instantiate(paintRed ? this._tileRedPrefab : this._tileBluePrefab, position, Quaternion.identity, this.transform);
         tileObject.name = name;
         return tileObject;
     }
