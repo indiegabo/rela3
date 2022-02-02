@@ -7,8 +7,8 @@ public class Board : MonoBehaviour
     [Header("Config")]
     [SerializeField] private int xSize = 8;
     [SerializeField] private int ySize = 8;
-    [SerializeField] private GameObject _tileRedPrefab;
-    [SerializeField] private GameObject _tileBluePrefab;
+    [SerializeField] private GameObject _tileEvenPrefab;
+    [SerializeField] private GameObject _tileOddPrefab;
 
 
     private static Dictionary<Vector3, Tile> _tiles;
@@ -37,8 +37,8 @@ public class Board : MonoBehaviour
 
     private GameObject GenerateObj(Vector3 position, string name)
     {
-        bool paintRed = (position.x % 2) == (position.y % 2);
-        GameObject tileObject = Instantiate(paintRed ? this._tileRedPrefab : this._tileBluePrefab, position, Quaternion.identity, this.transform);
+        bool bothEven = (position.x % 2) == (position.y % 2);
+        GameObject tileObject = Instantiate(bothEven ? this._tileEvenPrefab : this._tileOddPrefab, position, Quaternion.identity, this.transform);
         tileObject.name = name;
         return tileObject;
     }
