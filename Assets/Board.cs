@@ -10,7 +10,6 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject _tileEvenPrefab;
     [SerializeField] private GameObject _tileOddPrefab;
 
-
     private static Dictionary<Vector3, Tile> _tiles;
 
     private void Awake()
