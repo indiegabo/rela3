@@ -71,7 +71,6 @@ jobs:
         uses: actions/download-artifact@v2.0.10
         with:
           name: ${{ matrix.targetPlatform }}
-          path: build
     
       - name: action-zip
         uses: montudor/action-zip@v1.0.0
@@ -105,7 +104,6 @@ jobs:
         uses: actions/download-artifact@v2.0.10
         with:
           name: ${{ matrix.targetPlatform }}
-          path: build
     
       - name: action-zip
         uses: montudor/action-zip@v1.0.0
