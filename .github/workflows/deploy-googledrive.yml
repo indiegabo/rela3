@@ -1,4 +1,4 @@
-name: Build game
+name: Deploy to Google Drive
 
 on:
   workflow_call: [ build ]
