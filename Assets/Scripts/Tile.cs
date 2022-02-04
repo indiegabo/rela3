@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Tile
 {
-    public Vector3 position;
+    public Vector2 position;
     public string name;
     public GameObject obj;
 
-    public Tile(Vector3 position, string name, GameObject obj)
+    public Tile(Vector2 position, string name, GameObject obj)
     {
         this.position = position;
         this.name = name;

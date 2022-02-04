@@ -31,12 +31,13 @@ public class FallIntoTileTransition : MonoBehaviour, ITransition
 
     public void TransitionTo(Tile tile)
     {
+        Debug.Log(tile.position);
         StartCoroutine(Move(tile.position));
         StartCoroutine(Scale());
     }
 
 
-    IEnumerator Move(Vector3 destination)
+    IEnumerator Move(Vector2 destination)
     {
         // Remember to remove the setdelay
         int id = LeanTween.move(gameObject, destination, this._bounceAnimationTime).setEase(this._bounceCurve).setDelay(1).id;
