@@ -7,8 +7,10 @@ on:
       - completed
 
 jobs:
-  build:
+  deploy-google-drive:
     runs-on: ubuntu-latest
+    
+    needs: build
 
     strategy:
       fail-fast: false
@@ -18,8 +20,6 @@ jobs:
           - StandaloneWindows64
           - StandaloneLinux64
     
-    needs: Build
-
     steps:
       - uses: actions/checkout@v2
           
