@@ -17,6 +17,8 @@ jobs:
           - StandaloneWindows
           - StandaloneWindows64
           - StandaloneLinux64
+    
+    needs: Build
 
     steps:
       - uses: actions/checkout@v2
