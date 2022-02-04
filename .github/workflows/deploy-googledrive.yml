@@ -3,6 +3,8 @@ name: Deploy to Google Drive
 on:
   workflow_run:
     workflows: [ Build ]
+    types:
+      - completed
 
 jobs:
   build:

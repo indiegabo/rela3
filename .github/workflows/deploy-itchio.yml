@@ -1,7 +1,10 @@
 name: Deploy to Itch.IO
 
 on:
-  workflow_call: [ build ]
+  workflow_run:
+    workflows: [ Build ]
+    types:
+      - completed
 
 jobs:
   build:
