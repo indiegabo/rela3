@@ -391,6 +391,9 @@ MonoBehaviour:
   ySize: 8
   _tileEvenPrefab: {fileID: 1139823289972959031, guid: 4ca231727e68b4c4192fa0e01866f33b, type: 3}
   _tileOddPrefab: {fileID: 5600572349260311255, guid: b139f1c3917238241aa7343b52067aca, type: 3}
+  _itemsList:
+  - {fileID: 5748055534145742389, guid: 53d800990e9b0bb4fad54ce9f1b18552, type: 3}
+  - {fileID: 3312636329193864491, guid: bc6369ff91742654bb66c66102261445, type: 3}
 --- !u!4 &1193017238
 Transform:
   m_ObjectHideFlags: 0
@@ -500,7 +503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 686581501404170372, guid: 70c04b3bd5261324aa2a621d45eef88f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 686581501404170372, guid: 70c04b3bd5261324aa2a621d45eef88f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -543,6 +546,10 @@ PrefabInstance:
       value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 686581501404170375, guid: 70c04b3bd5261324aa2a621d45eef88f, type: 3}
+      propertyPath: _bounceDestination.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 686581501404170375, guid: 70c04b3bd5261324aa2a621d45eef88f, type: 3}
       propertyPath: _bounceDestination.y
       value: 2
       objectReference: {fileID: 0}
@@ -577,7 +584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 686581501404170372, guid: 70c04b3bd5261324aa2a621d45eef88f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 686581501404170372, guid: 70c04b3bd5261324aa2a621d45eef88f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -618,6 +625,10 @@ PrefabInstance:
     - target: {fileID: 686581501404170375, guid: 70c04b3bd5261324aa2a621d45eef88f, type: 3}
       propertyPath: _bounceAnimationTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 686581501404170375, guid: 70c04b3bd5261324aa2a621d45eef88f, type: 3}
+      propertyPath: _bounceDestination.x
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 686581501404170375, guid: 70c04b3bd5261324aa2a621d45eef88f, type: 3}
       propertyPath: _bounceDestination.y

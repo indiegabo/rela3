@@ -10,6 +10,9 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject _tileEvenPrefab;
     [SerializeField] private GameObject _tileOddPrefab;
 
+    [Header("Objects")]
+    [SerializeField] private List<GameObject> _itemsList;
+
     private static Dictionary<Vector3, Tile> _tiles;
 
     private void Awake()
@@ -48,4 +51,10 @@ public class Board : MonoBehaviour
         _tiles.TryGetValue(position, out tile);
         return tile;
     }
+
+    private void SpawnAccordion()
+    {
+        Tile destinationTile = GetTile(new Vector3(0, 0, 0));
+    }
+
 }
