@@ -1,7 +1,8 @@
 name: Deploy to Google Drive
 
 on:
-  workflow_call: [ build ]
+  workflow_run:
+    workflows: [ Build ]
 
 jobs:
   build:
