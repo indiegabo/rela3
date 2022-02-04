@@ -22,7 +22,6 @@ jobs:
           - StandaloneWindows
           - StandaloneWindows64
           - StandaloneLinux64
-          - WebGL
 
     steps:
       - uses: actions/checkout@v2
