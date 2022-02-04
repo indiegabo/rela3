@@ -14,7 +14,6 @@ jobs:
           - StandaloneWindows
           - StandaloneWindows64
           - StandaloneLinux64
-          - StandaloneOSX
           - WebGL
 
     steps:
