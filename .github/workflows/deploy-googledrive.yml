@@ -1,0 +1,36 @@
+name: Build game
+
+on:
+  workflow_call: [ build ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          - StandaloneWindows
+          - StandaloneWindows64
+          - StandaloneLinux64
+          - StandaloneOSX
+          - WebGL
+
+    steps:
+      - uses: actions/checkout@v2
+          
+      - name: Download a Builded Artifact
+        uses: actions/download-artifact@v2.0.10
+    
+      - name: action-zip
+        uses: montudor/action-zip@v1.0.0
+        with:
+          args: ${{ format('zip -r {0}.zip {0}/', matrix.targetPlatform) }}
+          
+      - name: Google Drive upload
+        uses: willo32/google-drive-upload-action@v1.0.2
+        with:
+          credentials: ${{ secrets.GOOGLE_DRIVE_CREDENTIAL }}
+          parent_folder_id: ${{ secrets.GOOGLE_DRIVE_PARENT_FOLDER }}
+          target: ${{ format('{0}.zip', matrix.targetPlatform) }}
