@@ -11,14 +11,12 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject _tileOddPrefab;
 
     [Header("Objects")]
-    [SerializeField] private List<GameObject> _itemsList;
 
     private static Dictionary<Vector2, Tile> _tiles;
 
     private void Awake()
     {
         _tiles = new Dictionary<Vector2, Tile>();
-        this.Initialize();
     }
 
     private void Start()
@@ -27,7 +25,7 @@ public class Board : MonoBehaviour
         this.SpawnStrawHat();
     }
 
-    private void Initialize()
+    public void Initialize()
     {
         for (int x = 0; x < xSize; x++)
         {
@@ -36,14 +34,14 @@ public class Board : MonoBehaviour
                 // Instantiate tile
                 Vector2 position = new Vector2(x, y);
                 string name = string.Format("Tile [{0}][{1}]", x, y);
-                GameObject obj = this.GenerateObj(position, name);
+                GameObject obj = this.GenerateTile(position, name);
                 Tile tile = new Tile(position, name, obj);
                 _tiles.Add(position, tile);
             }
         }
     }
 
-    private GameObject GenerateObj(Vector2 boardPosition, string name)
+    private GameObject GenerateTile(Vector2 boardPosition, string name)
     {
         Vector3 position = new Vector3(boardPosition.x, boardPosition.y, transform.position.z);
 
@@ -64,10 +62,9 @@ public class Board : MonoBehaviour
     private void SpawnAccordion()
     {
         Tile destinationTile = GetTile(new Vector2(0, 0));
-        Debug.Log(destinationTile.position);
         Vector3 startingPos = new Vector3(2, 20f, 0);
 
-        GameObject accordionPrefab = ItemServer.GetItemOfType(ItemType.Accordion);
+        GameObject accordionPrefab = ItemProvider.GetItemOfType(ItemType.Accordion);
         GameObject accordion = Instantiate(accordionPrefab, startingPos, Quaternion.identity, transform.parent);
 
         ITransition accordionTransition = accordion.GetComponent<ITransition>();
@@ -77,10 +74,9 @@ public class Board : MonoBehaviour
     private void SpawnStrawHat()
     {
         Tile destinationTile = GetTile(new Vector2(1, 0));
-        Debug.Log(destinationTile.position);
         Vector2 startingPos = new Vector2(0, 20f);
 
-        GameObject strawHatPrefab = ItemServer.GetItemOfType(ItemType.StrawHat);
+        GameObject strawHatPrefab = ItemProvider.GetItemOfType(ItemType.StrawHat);
         GameObject strawHat = Instantiate(strawHatPrefab, startingPos, Quaternion.identity, transform.parent);
 
         ITransition strawHatTransition = strawHat.GetComponent<ITransition>();

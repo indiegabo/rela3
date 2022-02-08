@@ -15,23 +15,20 @@ public class FallIntoTileTransition : MonoBehaviour, ITransition
     // Squeeze
     private AnimationCurve _squeezeCurve;
     private float _squeezeAnimationTime = 1f;
-    private Vector3 _squeezeDestination;
 
     private void Awake()
     {
         // Loading Bounce info
-        this._bounceCurve = this._data._bounceCurve;
-        this._bounceAnimationTime = this._data._bounceAnimationTime;
+        this._bounceCurve = this._data.bounceCurve;
+        this._bounceAnimationTime = this._data.bounceAnimationTime;
 
         // Loading Squeeze info
-        this._squeezeCurve = this._data._squeezeCurve;
-        this._squeezeAnimationTime = this._data._squeezeAnimationTime;
-        this._squeezeDestination = this._data._squeezeDestination;
+        this._squeezeCurve = this._data.squeezeCurve;
+        this._squeezeAnimationTime = this._data.squeezeAnimationTime;
     }
 
     public void TransitionTo(Tile tile)
     {
-        Debug.Log(tile.position);
         StartCoroutine(Move(tile.position));
         StartCoroutine(Scale());
     }
@@ -40,7 +37,7 @@ public class FallIntoTileTransition : MonoBehaviour, ITransition
     IEnumerator Move(Vector2 destination)
     {
         // Remember to remove the setdelay
-        int id = LeanTween.move(gameObject, destination, this._bounceAnimationTime).setEase(this._bounceCurve).setDelay(1).id;
+        int id = LeanTween.move(gameObject, destination, this._bounceAnimationTime).setEase(this._bounceCurve).id;
 
         while (LeanTween.descr(id) != null)
         {
@@ -50,7 +47,10 @@ public class FallIntoTileTransition : MonoBehaviour, ITransition
     IEnumerator Scale()
     {
         // Remember to remove the setdelay
-        int id = LeanTween.scale(gameObject, this._squeezeDestination, this._squeezeAnimationTime).setEase(this._squeezeCurve).setDelay(1f).id;
+        float newScaledX = this.transform.localScale.x - this._data.squeezeFactor;
+        float newScaledY = this.transform.localScale.y + this._data.squeezeFactor;
+        Vector3 squeezeDestination = new Vector3(newScaledX, newScaledY, this.transform.localScale.z);
+        int id = LeanTween.scale(gameObject, squeezeDestination, this._squeezeAnimationTime).setEase(this._squeezeCurve).id;
 
         while (LeanTween.descr(id) != null)
         {

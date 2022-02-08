@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemServer : MonoBehaviour
+public class ItemProvider : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _itemsList;
     private static Dictionary<ItemType, GameObject> _items = new Dictionary<ItemType, GameObject>();
