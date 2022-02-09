@@ -49,7 +49,6 @@ public class SimpleModeStateInputCheck : SimpleModeState
     public void OnGrabStart(Vector2 positionOnGrid)
     {
         this._grabStartedAt = positionOnGrid;
-        Debug.Log(positionOnGrid);
     }
 
     public void OnGrabFinish(Vector2 positionOnGrid)
