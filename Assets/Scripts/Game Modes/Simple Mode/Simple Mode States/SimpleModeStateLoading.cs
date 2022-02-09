@@ -36,6 +36,8 @@ public class SimpleModeStateLoading : SimpleModeState
         this._simpleMode.core.board.Initialize();
         Debug.Log("Board Initialized");
 
+        // TODO: Populate board
+
         this._simpleMode.ChangeState(this._simpleMode.simpleModeStateInputCheck);
     }
 
