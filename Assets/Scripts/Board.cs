@@ -19,12 +19,6 @@ public class Board : MonoBehaviour
         _tiles = new Dictionary<Vector2, Tile>();
     }
 
-    private void Start()
-    {
-        this.SpawnAccordion();
-        this.SpawnStrawHat();
-    }
-
     public void Initialize()
     {
         for (int x = 0; x < xSize; x++)
@@ -59,25 +53,26 @@ public class Board : MonoBehaviour
         return tile;
     }
 
-    private void SpawnAccordion()
+    public void SpawnAccordion()
     {
         Tile destinationTile = GetTile(new Vector2(0, 0));
         Vector3 startingPos = new Vector3(2, 20f, 0);
 
         GameObject accordionPrefab = ItemProvider.GetItemOfType(ItemType.Accordion);
-        GameObject accordion = Instantiate(accordionPrefab, startingPos, Quaternion.identity, transform.parent);
+        Debug.Log(accordionPrefab);
+        GameObject accordion = Instantiate(accordionPrefab, startingPos, Quaternion.identity, destinationTile.obj.transform);
 
         ITransition accordionTransition = accordion.GetComponent<ITransition>();
         accordionTransition.TransitionTo(destinationTile);
     }
 
-    private void SpawnStrawHat()
+    public void SpawnStrawHat()
     {
         Tile destinationTile = GetTile(new Vector2(1, 0));
         Vector2 startingPos = new Vector2(0, 20f);
 
         GameObject strawHatPrefab = ItemProvider.GetItemOfType(ItemType.StrawHat);
-        GameObject strawHat = Instantiate(strawHatPrefab, startingPos, Quaternion.identity, transform.parent);
+        GameObject strawHat = Instantiate(strawHatPrefab, startingPos, Quaternion.identity, destinationTile.obj.transform);
 
         ITransition strawHatTransition = strawHat.GetComponent<ITransition>();
         strawHatTransition.TransitionTo(destinationTile);

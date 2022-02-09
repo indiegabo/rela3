@@ -5,18 +5,20 @@ using UnityEngine;
 public class SimpleMode : Entity<SimpleModeCore>
 {
 
-    private SimpleModeStateLoading _simpleModeStateLoading;
+    public SimpleModeStateLoading simpleModeStateLoading;
+    public SimpleModeStateInputCheck simpleModeStateInputCheck;
 
     private void Start()
     {
         this.LoadStates();
 
-        this.stateMachine.SetActiveState(this._simpleModeStateLoading);
+        this.stateMachine.SetActiveState(this.simpleModeStateLoading);
     }
 
     private void LoadStates()
     {
-        this._simpleModeStateLoading = new SimpleModeStateLoading(this);
+        this.simpleModeStateLoading = new SimpleModeStateLoading(this);
+        this.simpleModeStateInputCheck = new SimpleModeStateInputCheck(this);
     }
 
 }

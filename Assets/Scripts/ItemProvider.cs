@@ -7,7 +7,7 @@ public class ItemProvider : MonoBehaviour
     [SerializeField] private List<GameObject> _itemsList;
     private static Dictionary<ItemType, GameObject> _items = new Dictionary<ItemType, GameObject>();
 
-    private void Awake()
+    public void Initialize()
     {
         this._itemsList.ForEach(AddItemIntoDictionary);
     }

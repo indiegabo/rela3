@@ -31,7 +31,12 @@ public class SimpleModeStateLoading : SimpleModeState
     /// </summary>
     public override void OnEnter()
     {
+        this._simpleMode.core.itemProvider.Initialize();
+        Debug.Log("Provider Initialized");
         this._simpleMode.core.board.Initialize();
+        Debug.Log("Board Initialized");
+
+        this._simpleMode.ChangeState(this._simpleMode.simpleModeStateInputCheck);
     }
 
     /// <summary>

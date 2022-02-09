@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "2b2fcc9ce9fbd2a8936654e613084daa4f0ea096"
+      "hash": "1b058989658642ab95873d382ccebcddc4271bac"
     },
     "com.unity.2d.animation": {
       "version": "5.0.10",
@@ -119,6 +119,15 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.inputsystem": {
+      "version": "1.2.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.uielements": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.mathematics": {

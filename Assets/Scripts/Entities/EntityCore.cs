@@ -7,6 +7,7 @@ public abstract class EntityCore : MonoBehaviour
     [Header("Entity Components")]
     [SerializeField] private Board _board;
     [SerializeField] private ItemProvider _itemProvider;
+    // [SerializeField] private InputHandler _inputHandler;
 
     public Board board => this._board;
     public ItemProvider itemProvider => this._itemProvider;
