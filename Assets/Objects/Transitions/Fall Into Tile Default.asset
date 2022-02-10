@@ -170,4 +170,4 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _squeezeAnimationTime: 1
-  _squeezeFactor: 0.445
+  _squeezeFactor: 0.1
