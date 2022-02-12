@@ -33,10 +33,11 @@ public class SimpleModeStateLoading : SimpleModeState
         ItemFactory itemFactory = this._simpleMode.core.itemFactory;
         Board board = this._simpleMode.core.board;
 
-        itemFactory.Initialize();
-        Debug.Log("Factory Initialized");
         board.Initialize();
         Debug.Log("Board Initialized");
+
+        itemFactory.Initialize();
+        Debug.Log("Factory Initialized");
 
         itemFactory.PopulateBoard(board);
         Debug.Log("Board Populated");

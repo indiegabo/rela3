@@ -54,18 +54,4 @@ public class Board : MonoBehaviour
         return tile;
     }
 
-
-
-    public void SpawnStrawHat()
-    {
-        Tile destinationTile = GetTile(new Vector2(1, 0));
-        Vector2 startingPos = new Vector2(0, 20f);
-
-        GameObject strawHatPrefab = ItemProvider.GetItemOfType(ItemType.StrawHat);
-        GameObject strawHat = Instantiate(strawHatPrefab, startingPos, Quaternion.identity, destinationTile.obj.transform);
-
-        ITransition strawHatTransition = strawHat.GetComponent<ITransition>();
-        strawHatTransition.TransitionTo(destinationTile);
-    }
-
 }

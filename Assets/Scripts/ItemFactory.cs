@@ -10,6 +10,9 @@ public class ItemFactory : MonoBehaviour
     // Needed components
     private ItemProvider _itemProvider;
 
+    // Logic 
+    private Board _currentBoard;
+
     private void Awake()
     {
         this._itemProvider = this.GetComponent<ItemProvider>();
@@ -27,6 +30,7 @@ public class ItemFactory : MonoBehaviour
 
     private IEnumerator FirstSpawn(Board board)
     {
+        this._currentBoard = board;
         for (int y = 0; y < board.ySize; y++)
         {
             for (int x = 0; x < board.xSize; x++)
@@ -35,24 +39,38 @@ public class ItemFactory : MonoBehaviour
                 yield return new WaitForSeconds(this._populateSpawnDelay);
             }
         }
+        this._currentBoard = null;
     }
 
     public void SpawnRandomItem(Tile tile)
     {
+        if (this._currentBoard == null) return;
+
         Vector3 startingPos = new Vector3(tile.position.x, 20f, 0);
-        List<ItemType> blockedItems = new List<ItemType>();
-        // Identify horizontally blocked item
-        // Identify vertically blocked item
+        List<ItemType> blockedTypes = new List<ItemType>();
 
-        GameObject itemPrefab = this._itemProvider.GetRandomItem(blockedItems);
-        // ItemType itemType = itemPrefab.GetComponent<ItemType>();
+        Item horizonBlockedItem = this.CheckRepeatingTiles(tile, 1, 0);
+        if (horizonBlockedItem != null)
+            blockedTypes.Add(horizonBlockedItem.type);
 
+        Item verticalBlockedItem = this.CheckRepeatingTiles(tile, 0, 1);
+        if (verticalBlockedItem != null)
+            blockedTypes.Add(verticalBlockedItem.type);
 
+        InstantiableItem instatiableItem = this._itemProvider.GetRandomItem(blockedTypes);
 
-        // (x == x+1 && x == x+2) || (x == x-1 && x == x-2) || (y == y+1 && y == y+2) || (y == y-1 && y == y-2)
-        GameObject item = Instantiate(itemPrefab, startingPos, Quaternion.identity, tile.obj.transform);
+        Item item = Instantiate<Item>(instatiableItem.itemPrefab, startingPos, Quaternion.identity, tile.obj.transform);
+        tile.item = item;
 
         ITransition itemTransition = item.GetComponent<ITransition>();
         itemTransition.TransitionTo(tile);
+    }
+
+    private Item CheckRepeatingTiles(Tile currentTile, int horizontal, int vertical)
+    {
+        Tile tileMinus1 = this._currentBoard.GetTile(new Vector2(currentTile.position.x - 1 * horizontal, currentTile.position.y - 1 * vertical));
+        Tile tileMinus2 = this._currentBoard.GetTile(new Vector2(currentTile.position.x - 2 * horizontal, currentTile.position.y - 2 * vertical));
+
+        return (tileMinus1 != null && tileMinus2 != null && tileMinus1.item != null && tileMinus2.item != null) ? tileMinus1.item : null;
     }
 }
