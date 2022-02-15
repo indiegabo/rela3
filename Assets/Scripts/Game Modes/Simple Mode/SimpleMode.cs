@@ -7,6 +7,7 @@ public class SimpleMode : Entity<SimpleModeCore>
 
     public SimpleModeStateLoading simpleModeStateLoading;
     public SimpleModeStateInputCheck simpleModeStateInputCheck;
+    public SimpleModeStateCheckTiles simpleModeStateCheckTiles;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class SimpleMode : Entity<SimpleModeCore>
     {
         this.simpleModeStateLoading = new SimpleModeStateLoading(this);
         this.simpleModeStateInputCheck = new SimpleModeStateInputCheck(this);
+        this.simpleModeStateCheckTiles = new SimpleModeStateCheckTiles(this);
     }
 
 }

@@ -15,10 +15,4 @@ public class Tile
         this.name = name;
         this.obj = obj;
     }
-
-    // public GameObject TryGetChildObject(out GameObject childObject)
-    // {
-    //     childObject = this.obj.gameObject.transform.GetChild(0).gameObject;
-    //     return childObject;
-    // }
 }
