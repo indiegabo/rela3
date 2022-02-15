@@ -5,6 +5,8 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     [Header("Config")]
+    [SerializeField] [Range(1f, 10f)] public float itemZDistanceFactor = 5f;
+    [SerializeField] [Range(1f, 10f)] public float firstSpawnYDistanceFactor = 5f;
     [SerializeField] private int _xSize = 8;
     [SerializeField] private int _ySize = 8;
     [SerializeField] private GameObject _tileEvenPrefab;
@@ -51,5 +53,24 @@ public class Board : MonoBehaviour
     {
         this.tiles.TryGetValue(position, out Tile tile);
         return tile;
+    }
+
+    public void SwapTilesItems(Tile from, Tile to)
+    {
+        //Switch tile item references
+        Item fromItem = from.item;
+        Item toItem = to.item;
+
+        // Swap occurs here
+        from.item = toItem;
+        to.item = fromItem;
+
+        //Switch parents
+        from.item.transform.parent = from.obj.transform;
+        to.item.transform.parent = to.obj.transform;
+
+        //Set item positions to its tile position (0f,0f)
+        from.item.transform.localPosition = new Vector3(0f, 0f, -5f);
+        to.item.transform.localPosition = new Vector3(0f, 0f, -5f);
     }
 }

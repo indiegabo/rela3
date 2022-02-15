@@ -48,7 +48,11 @@ public class ItemFactory : MonoBehaviour
     {
         if (this._currentBoard == null) return;
 
-        Vector3 startingPos = new Vector3(tile.position.x, 20f, 0);
+        Vector3 startingPos = new Vector3(
+            tile.position.x,
+            tile.position.y + this._currentBoard.firstSpawnYDistanceFactor,
+            this._currentBoard.transform.position.z - this._currentBoard.itemZDistanceFactor
+        );
 
         this.CheckRepeatingTiles(tile, 1, 0);
         this.CheckRepeatingTiles(tile, 0, 1);
@@ -69,7 +73,7 @@ public class ItemFactory : MonoBehaviour
         Tile tileMinus1 = this._currentBoard.GetTile(new Vector2(currentTile.position.x - 1 * horizontal, currentTile.position.y - 1 * vertical));
         Tile tileMinus2 = this._currentBoard.GetTile(new Vector2(currentTile.position.x - 2 * horizontal, currentTile.position.y - 2 * vertical));
 
-        if(tileMinus1 != null && tileMinus2 != null && tileMinus1.item != null && tileMinus2.item != null)
+        if (tileMinus1 != null && tileMinus2 != null && tileMinus1.item != null && tileMinus2.item != null)
         {
             blockedTypes.Add(tileMinus1.item.type);
             return tileMinus1.item;

@@ -56,26 +56,13 @@ public class SimpleModeStateInputCheck : SimpleModeState
         Vector2 distance = (positionOnGrid - this._grabStartedAt).normalized;
 
         //Store initial tile and final tile in a variable
-        Tile initialTile = _simpleMode.core.board.GetTile(this._grabStartedAt);
-        Tile finalTile = _simpleMode.core.board.GetTile(this._grabStartedAt + distance);
-        
+        Tile from = _simpleMode.core.board.GetTile(this._grabStartedAt);
+        Tile to = _simpleMode.core.board.GetTile(this._grabStartedAt + distance);
+
         //If any of the tiles is null, or they are the same, do nothing
-        if (initialTile == null || finalTile == null || (initialTile.position == finalTile.position)) return;
+        if (from == null || to == null || (from.position == to.position)) return;
 
-        //Switch tile item references
-        Item initialTileItem = initialTile.item;
-        Item finalTileItem = finalTile.item;
-
-        initialTile.item = finalTileItem;
-        finalTile.item = initialTileItem;
-
-        //Switch parents
-        initialTile.item.transform.parent = initialTile.obj.transform;
-        finalTile.item.transform.parent = finalTile.obj.transform;
-
-        //Set item positions to its tile position (0f,0f)
-        initialTile.item.transform.localPosition = new Vector3(0f, 0f, -5f);
-        finalTile.item.transform.localPosition = new Vector3(0f, 0f, -5f);
+        _simpleMode.core.board.SwapTilesItems(from, to);
 
         _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateCheckTiles);
     }
