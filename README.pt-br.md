@@ -4,7 +4,7 @@
 
 # Rela 3 - Um jogo estilo "Combine 3" com temática de festa junina!
 
-Este projeto é um "Combine 3" produzido por nossa comunidade durante as lives no [canal na twitch](https://twitch.tv/indiegabo_dev) do IndieGabo.
+Este projeto é um "Combine 3" produzido por nossa comunidade durante as lives no [canal](https://twitch.tv/indiegabo_dev) do IndieGabo na Twitch.
 
 Nosso objetivo é ter um cenário 3D lindo e polido enquanto proporcionamos uma experiência feliz trazendo mecânicas divertidas.
 
