@@ -55,16 +55,28 @@ public class SimpleModeStateInputCheck : SimpleModeState
     {
         Vector2 distance = (positionOnGrid - this._grabStartedAt).normalized;
 
-        if (distance == Vector2.left)
-            Debug.Log("Move Left");
+        //Store initial tile and final tile in a variable
+        Tile initialTile = _simpleMode.core.board.GetTile(this._grabStartedAt);
+        Tile finalTile = _simpleMode.core.board.GetTile(this._grabStartedAt + distance);
+        
+        //If any of the tiles is null, or they are the same, do nothing
+        if (initialTile == null || finalTile == null || (initialTile.position == finalTile.position)) return;
 
-        if (distance == Vector2.right)
-            Debug.Log("Move Right");
+        //Switch tile item references
+        Item initialTileItem = initialTile.item;
+        Item finalTileItem = finalTile.item;
 
-        if (distance == Vector2.up)
-            Debug.Log("Move Up");
+        initialTile.item = finalTileItem;
+        finalTile.item = initialTileItem;
 
-        if (distance == Vector2.down)
-            Debug.Log("Move Down");
+        //Switch parents
+        initialTile.item.transform.parent = initialTile.obj.transform;
+        finalTile.item.transform.parent = finalTile.obj.transform;
+
+        //Set item positions to its tile position (0f,0f)
+        initialTile.item.transform.localPosition = new Vector3(0f, 0f, -5f);
+        finalTile.item.transform.localPosition = new Vector3(0f, 0f, -5f);
+
+        _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateCheckTiles);
     }
 }

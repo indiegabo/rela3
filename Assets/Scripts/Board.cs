@@ -49,9 +49,7 @@ public class Board : MonoBehaviour
 
     public Tile GetTile(Vector2 position)
     {
-        Tile tile;
-        this.tiles.TryGetValue(position, out tile);
+        this.tiles.TryGetValue(position, out Tile tile);
         return tile;
     }
-
 }
