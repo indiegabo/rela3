@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SimpleModeStateLoading : SimpleModeState
 {
-
     public SimpleModeStateLoading(SimpleMode simpleMode) : base(simpleMode)
     {
     }
@@ -31,12 +30,17 @@ public class SimpleModeStateLoading : SimpleModeState
     /// </summary>
     public override void OnEnter()
     {
-        this._simpleMode.core.itemProvider.Initialize();
-        Debug.Log("Provider Initialized");
-        this._simpleMode.core.board.Initialize();
+        ItemFactory itemFactory = this._simpleMode.core.itemFactory;
+        Board board = this._simpleMode.core.board;
+
+        board.Initialize();
         Debug.Log("Board Initialized");
 
-        // TODO: Populate board
+        itemFactory.Initialize();
+        Debug.Log("Factory Initialized");
+
+        itemFactory.PopulateBoard(board);
+        Debug.Log("Board Populated");
 
         this._simpleMode.ChangeState(this._simpleMode.simpleModeStateInputCheck);
     }
@@ -46,5 +50,6 @@ public class SimpleModeStateLoading : SimpleModeState
     /// </summary>
     public override void OnExit()
     {
+
     }
 }

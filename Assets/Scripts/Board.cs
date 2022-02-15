@@ -5,18 +5,19 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     [Header("Config")]
-    [SerializeField] private int xSize = 8;
-    [SerializeField] private int ySize = 8;
+    [SerializeField] private int _xSize = 8;
+    [SerializeField] private int _ySize = 8;
     [SerializeField] private GameObject _tileEvenPrefab;
     [SerializeField] private GameObject _tileOddPrefab;
 
-    [Header("Objects")]
+    public Dictionary<Vector2, Tile> tiles { get; private set; }
 
-    private static Dictionary<Vector2, Tile> _tiles;
+    public int xSize => this._xSize;
+    public int ySize => this._ySize;
 
     private void Awake()
     {
-        _tiles = new Dictionary<Vector2, Tile>();
+        this.tiles = new Dictionary<Vector2, Tile>();
     }
 
     public void Initialize()
@@ -30,7 +31,7 @@ public class Board : MonoBehaviour
                 string name = string.Format("Tile [{0}][{1}]", x, y);
                 GameObject obj = this.GenerateTile(position, name);
                 Tile tile = new Tile(position, name, obj);
-                _tiles.Add(position, tile);
+                this.tiles.Add(position, tile);
             }
         }
     }
@@ -46,36 +47,11 @@ public class Board : MonoBehaviour
         return tileObject;
     }
 
-    public static Tile GetTile(Vector2 position)
+    public Tile GetTile(Vector2 position)
     {
-        Tile tile = null;
-        _tiles.TryGetValue(position, out tile);
+        Tile tile;
+        this.tiles.TryGetValue(position, out tile);
         return tile;
-    }
-
-    public void SpawnAccordion()
-    {
-        Tile destinationTile = GetTile(new Vector2(0, 0));
-        Vector3 startingPos = new Vector3(2, 20f, 0);
-
-        GameObject accordionPrefab = ItemProvider.GetItemOfType(ItemType.Accordion);
-        Debug.Log(accordionPrefab);
-        GameObject accordion = Instantiate(accordionPrefab, startingPos, Quaternion.identity, destinationTile.obj.transform);
-
-        ITransition accordionTransition = accordion.GetComponent<ITransition>();
-        accordionTransition.TransitionTo(destinationTile);
-    }
-
-    public void SpawnStrawHat()
-    {
-        Tile destinationTile = GetTile(new Vector2(1, 0));
-        Vector2 startingPos = new Vector2(0, 20f);
-
-        GameObject strawHatPrefab = ItemProvider.GetItemOfType(ItemType.StrawHat);
-        GameObject strawHat = Instantiate(strawHatPrefab, startingPos, Quaternion.identity, destinationTile.obj.transform);
-
-        ITransition strawHatTransition = strawHat.GetComponent<ITransition>();
-        strawHatTransition.TransitionTo(destinationTile);
     }
 
 }
