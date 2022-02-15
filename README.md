@@ -11,7 +11,7 @@ and provide a happy experience with fun mechanics.
 
 - An 8x8 tiled board to accomodate our movable pieces
 - As we press start the board is populated by pieces making sure no matchs happen before the player's first move
-- Player "moves" are registered. We will use this soon.
+- Player "moves" are registered. We will wizely use this soon.
 
 ## Unity Version
 

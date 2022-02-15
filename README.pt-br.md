@@ -12,7 +12,7 @@ Nosso objetivo é ter um cenário 3D lindo e polido enquanto proporcionamos uma 
 
 - Um tabuleiro de 8x8 separado por quadrados para acomodar as peças
 - Ao iniciar o jogo o tabuleiro é populado com as peças garantindo que não existam combinações antes do primeiro movimento de quem joga
-- As momiventações de quem joga já estão sendo registradas. Usaremos isso com sabedoria.
+- As movimentações de quem joga já estão sendo registradas. Usaremos isso com sabedoria.
 
 ## Versão da Unity
 
@@ -20,6 +20,6 @@ Testado na [2020.3.25f1 LTS](https://unity3d.com/pt/unity/whats-new/2020.3.25)
 
 ## Onde me achar
 
-- Junt-se a nossa comunidade no [Discord](https://discord.gg/uvgWxNPk) para estudarmos juntos
+- Junte-se a nossa comunidade no [Discord](https://discord.gg/uvgWxNPk) para estudarmos juntos
 - Lives na [Twitch](https://twitch.tv/indiegabo_dev)
 - [Instagram](https://instagram.com/indiegabo)
