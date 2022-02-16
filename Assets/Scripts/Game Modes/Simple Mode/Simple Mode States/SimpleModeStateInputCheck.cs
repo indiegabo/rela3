@@ -64,6 +64,6 @@ public class SimpleModeStateInputCheck : SimpleModeState
 
         _simpleMode.core.board.SwapTilesItems(from, to);
 
-        _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateCheckTiles);
+        _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateEvaluateMatches);
     }
 }

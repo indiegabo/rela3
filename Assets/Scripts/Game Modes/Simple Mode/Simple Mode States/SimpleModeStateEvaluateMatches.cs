@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleModeStateCheckTiles : SimpleModeState
+public class SimpleModeStateEvaluateMatches : SimpleModeState
 {
-    public SimpleModeStateCheckTiles(SimpleMode simpleMode) : base(simpleMode)
+    public SimpleModeStateEvaluateMatches(SimpleMode simpleMode) : base(simpleMode)
     {
     }
 
