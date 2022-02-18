@@ -12,6 +12,9 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject _tileEvenPrefab;
     [SerializeField] private GameObject _tileOddPrefab;
 
+    public Tile swapedFrom;
+    public Tile swapedTo;
+
     public Dictionary<Vector2, Tile> tiles { get; private set; }
 
     public int xSize => this._xSize;
@@ -57,6 +60,7 @@ public class Board : MonoBehaviour
 
     public void SwapTilesItems(Tile from, Tile to)
     {
+
         //Switch tile item references
         Item fromItem = from.item;
         Item toItem = to.item;
@@ -72,5 +76,10 @@ public class Board : MonoBehaviour
         //Set item positions to its tile position (0f,0f)
         from.item.transform.localPosition = new Vector3(0f, 0f, -5f);
         to.item.transform.localPosition = new Vector3(0f, 0f, -5f);
+    }
+
+    public void ScanMatches()
+    {
+
     }
 }
