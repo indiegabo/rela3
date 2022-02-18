@@ -58,6 +58,12 @@ public class Board : MonoBehaviour
         return tile;
     }
 
+    public Tile GetTileByItemType(Vector2 position, ItemType itemType)
+    {
+        this.tiles.TryGetValue(position, out Tile tile);
+        return (tile != null && itemType == tile.item.type) ? tile : null;
+    }
+
     public void SwapTilesItems(Tile from, Tile to)
     {
 

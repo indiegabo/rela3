@@ -64,11 +64,11 @@ public class SimpleModeStateInputCheck : SimpleModeState
         //If any of the tiles is null, or they are the same, do nothing
         if (from == null || to == null || (from.position == to.position)) return;
 
-        _board.swapedFrom = from;
-        _board.swapedTo = to;
+        this._board.swapedFrom = from;
+        this._board.swapedTo = to;
 
-        _simpleMode.core.board.SwapTilesItems(from, to);
+        this._simpleMode.core.board.SwapTilesItems(from, to);
 
-        _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateEvaluateMatches);
+        this._simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateEvaluateMatches);
     }
 }
