@@ -29,8 +29,10 @@ public class SimpleModeStateEvaluateMatches : SimpleModeState
 
         Debug.Log("Evaluating matches...");
 
-        this.CheckMatches(_board.swapedTo);
-        this.CheckMatches(_board.swapedFrom);
+        this._board.ScanMatches(_board.swapedTo);
+        this._board.ScanMatches(_board.swapedFrom);
+        // this.CheckMatches(_board.swapedTo);
+        // this.CheckMatches(_board.swapedFrom);
 
         Debug.Log(this._currentMatches.Count);
 
@@ -129,7 +131,7 @@ public class SimpleModeStateEvaluateMatches : SimpleModeState
         {
             for (int i = 0; i < this._currentMatches[0].size; i++)
             {
-                
+
             }
         }
     }
