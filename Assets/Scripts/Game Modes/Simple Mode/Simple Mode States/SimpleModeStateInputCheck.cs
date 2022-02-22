@@ -6,10 +6,12 @@ using UnityEngine;
 public class SimpleModeStateInputCheck : SimpleModeState
 {
 
+    private Board _board;
     private Vector2 _grabStartedAt;
 
     public SimpleModeStateInputCheck(SimpleMode simpleMode) : base(simpleMode)
     {
+        this._board = simpleMode.core.board;
     }
 
     /// <summary>
@@ -62,8 +64,11 @@ public class SimpleModeStateInputCheck : SimpleModeState
         //If any of the tiles is null, or they are the same, do nothing
         if (from == null || to == null || (from.position == to.position)) return;
 
-        _simpleMode.core.board.SwapTilesItems(from, to);
+        this._board.swapedFrom = from;
+        this._board.swapedTo = to;
 
-        _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateEvaluateMatches);
+        this._simpleMode.core.board.SwapTilesItems(from, to);
+
+        this._simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateEvaluateMatches);
     }
 }

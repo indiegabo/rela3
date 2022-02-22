@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using IA;
+
 
 public class Board : MonoBehaviour
 {
@@ -12,6 +14,10 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject _tileEvenPrefab;
     [SerializeField] private GameObject _tileOddPrefab;
 
+    public Tile swapedFrom;
+    public Tile swapedTo;
+    public Dijkstra dijkstra { get; private set; }
+
     public Dictionary<Vector2, Tile> tiles { get; private set; }
 
     public int xSize => this._xSize;
@@ -19,6 +25,7 @@ public class Board : MonoBehaviour
 
     private void Awake()
     {
+        this.dijkstra = GetComponent<Dijkstra>();
         this.tiles = new Dictionary<Vector2, Tile>();
     }
 
@@ -55,8 +62,15 @@ public class Board : MonoBehaviour
         return tile;
     }
 
+    public Tile GetTileByItemType(Vector2 position, ItemType itemType)
+    {
+        this.tiles.TryGetValue(position, out Tile tile);
+        return (tile != null && itemType == tile.item.type) ? tile : null;
+    }
+
     public void SwapTilesItems(Tile from, Tile to)
     {
+
         //Switch tile item references
         Item fromItem = from.item;
         Item toItem = to.item;
@@ -72,5 +86,24 @@ public class Board : MonoBehaviour
         //Set item positions to its tile position (0f,0f)
         from.item.transform.localPosition = new Vector3(0f, 0f, -5f);
         to.item.transform.localPosition = new Vector3(0f, 0f, -5f);
+    }
+
+    public void ScanMatches(Tile from)
+    {
+        List<Tile> path = this.dijkstra.FindPath(from);
+        this.DebugTiles(path);
+    }
+
+    // Debug Stuff
+    private void DebugTiles(List<Tile> tiles, string title = "Debugging List:")
+    {
+        if (tiles.Count <= 0) return;
+
+        Debug.Log(title);
+
+        foreach (Tile dTile in tiles)
+        {
+            Debug.Log($"Tile [{dTile.position.x}][{dTile.position.y}] - {dTile.item.type}");
+        }
     }
 }
