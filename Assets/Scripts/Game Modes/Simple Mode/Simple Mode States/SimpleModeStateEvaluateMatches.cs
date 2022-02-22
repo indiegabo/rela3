@@ -6,6 +6,7 @@ using System.Linq;
 public class SimpleModeStateEvaluateMatches : SimpleModeState
 {
     private Board _board;
+    private List<Match> _currentMatches = new List<Match>();
 
     public SimpleModeStateEvaluateMatches(SimpleMode simpleMode) : base(simpleMode)
     {
@@ -31,12 +32,15 @@ public class SimpleModeStateEvaluateMatches : SimpleModeState
         this.CheckMatches(_board.swapedTo);
         this.CheckMatches(_board.swapedFrom);
 
+        Debug.Log(this._currentMatches.Count);
+
         _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateInputCheck);
     }
 
     public override void OnExit()
     {
         base.OnExit();
+        this._currentMatches.Clear();
         if (this._board.swapedFrom != null || this._board.swapedTo != null)
         {
             // TODO: Swap back
@@ -76,6 +80,7 @@ public class SimpleModeStateEvaluateMatches : SimpleModeState
             // Match happened
             sameTypeItemsTiles.Add(tile);
             sameTypeItemsTiles = sameTypeItemsTiles.OrderBy(tile => tile.position.x).ToList<Tile>();
+            this._currentMatches.Add(new Match(sameTypeItemsTiles));
         }
         else
         {
@@ -108,6 +113,7 @@ public class SimpleModeStateEvaluateMatches : SimpleModeState
             // Match happened
             sameTypeItemsTiles.Add(tile);
             sameTypeItemsTiles = sameTypeItemsTiles.OrderBy(tile => tile.position.y).ToList<Tile>();
+            this._currentMatches.Add(new Match(sameTypeItemsTiles));
         }
         else
         {
@@ -116,6 +122,19 @@ public class SimpleModeStateEvaluateMatches : SimpleModeState
 
         DebugTiles(sameTypeItemsTiles, "Same Vertical Items Types:");
     }
+
+    private void MatchesToMerge()
+    {
+        if (this._currentMatches.Count > 1)
+        {
+            for (int i = 0; i < this._currentMatches[0].size; i++)
+            {
+                
+            }
+        }
+    }
+
+    // Debug Stuff
 
     private void DebugTiles(List<Tile> tiles, string title = "Debugging List:")
     {
