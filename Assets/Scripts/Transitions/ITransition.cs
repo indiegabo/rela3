@@ -1,4 +1,8 @@
-public interface ITransition
+namespace IndieGabo.Rela3.Transitions
 {
-    public void TransitionTo(Tile tile);
+    public interface ITransition
+    {
+        public void TransitionTo(Tile tile);
+    }
+
 }

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using IndieGabo.Rela3;
+using IndieGabo.Rela3.Items;
 using UnityEngine;
 
 public abstract class EntityCore : MonoBehaviour

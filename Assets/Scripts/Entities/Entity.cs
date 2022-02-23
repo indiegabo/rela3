@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using IndieGabo.Rela3.StateManagement;
 using UnityEngine;
 
 public abstract class Entity<T> : MonoBehaviour where T : EntityCore

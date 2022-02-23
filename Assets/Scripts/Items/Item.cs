@@ -1,24 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using IndieGabo.Rela3.Transitions;
 using UnityEngine;
-
-public class Item : MonoBehaviour
+namespace IndieGabo.Rela3.Items
 {
-    [Header("Config")]
-    [SerializeField] private ItemType _type;
-
-    private Tile _currentTile;
-    private ITransition _transition;
-
-    public ItemType type => this._type;
-
-    private void Awake()
+    public class Item : MonoBehaviour
     {
-        this._transition = this.GetComponent<ITransition>();
-    }
+        [Header("Config")]
+        [SerializeField] private ItemType _type;
 
-    private void Start()
-    {
-    }
+        private Tile _currentTile;
+        private ITransition _transition;
 
+        public ItemType type => this._type;
+
+        private void Awake()
+        {
+            this._transition = this.GetComponent<ITransition>();
+        }
+
+        private void Start()
+        {
+        }
+
+        public void Remove()
+        {
+            Destroy(gameObject);
+        }
+
+    }
 }

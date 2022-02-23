@@ -3,148 +3,75 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class SimpleModeStateEvaluateMatches : SimpleModeState
+namespace IndieGabo.Rela3.GameModes
 {
-    private Board _board;
-    private List<Match> _currentMatches = new List<Match>();
-
-    public SimpleModeStateEvaluateMatches(SimpleMode simpleMode) : base(simpleMode)
+    public class SimpleModeStateEvaluateMatches : SimpleModeState
     {
-        this._board = simpleMode.core.board;
-    }
+        private Board _board;
+        private List<Match> _currentMatches = new List<Match>();
 
-    public override void Tick()
-    {
-        base.Tick();
-    }
-
-    public override void FixedTick()
-    {
-        base.FixedTick();
-    }
-
-    public override void OnEnter()
-    {
-        base.OnEnter();
-
-        Debug.Log("Evaluating matches...");
-
-        this._board.ScanMatches(_board.swapedTo);
-        this._board.ScanMatches(_board.swapedFrom);
-
-        Debug.Log(this._currentMatches.Count);
-
-        _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateInputCheck);
-    }
-
-    public override void OnExit()
-    {
-        base.OnExit();
-        this._currentMatches.Clear();
-        if (this._board.swapedFrom != null || this._board.swapedTo != null)
+        public SimpleModeStateEvaluateMatches(SimpleMode simpleMode) : base(simpleMode)
         {
-            // TODO: Swap back
-        }
-    }
-
-    private void CheckMatches(Tile tile)
-    {
-        Debug.Log($"Finding Horizontal Matches for [{tile.position.x}][{tile.position.y}] - Type: {tile.item.type}");
-        this.FindHorizontalMatches(tile);
-
-        Debug.Log($"Finding Vertical Matches for [{tile.position.x}][{tile.position.y}] - Type: {tile.item.type}");
-        this.FindVerticalMatches(tile);
-    }
-
-    private void FindHorizontalMatches(Tile tile)
-    {
-        List<Tile> sameTypeItemsTiles = new List<Tile>();
-
-        Tile previous = this._board.GetTileByItemType(new Vector2(tile.position.x - 1, tile.position.y), tile.item.type);
-        Tile next = this._board.GetTileByItemType(new Vector2(tile.position.x + 1, tile.position.y), tile.item.type);
-
-        while (previous != null)
-        {
-            sameTypeItemsTiles.Add(previous);
-            previous = this._board.GetTileByItemType(new Vector2(previous.position.x - 1, tile.position.y), tile.item.type);
+            this._board = simpleMode.core.board;
         }
 
-        while (next != null)
+        public override void Tick()
         {
-            sameTypeItemsTiles.Add(next);
-            next = this._board.GetTileByItemType(new Vector2(next.position.x + 1, tile.position.y), tile.item.type);
+            base.Tick();
         }
 
-        if (sameTypeItemsTiles.Count >= 2)
+        public override void FixedTick()
         {
-            // Match happened
-            sameTypeItemsTiles.Add(tile);
-            sameTypeItemsTiles = sameTypeItemsTiles.OrderBy(tile => tile.position.x).ToList<Tile>();
-            this._currentMatches.Add(new Match(sameTypeItemsTiles));
-        }
-        else
-        {
-            sameTypeItemsTiles.Clear();
+            base.FixedTick();
         }
 
-        DebugTiles(sameTypeItemsTiles, "Same Horizontal Items Types:");
-    }
-    private void FindVerticalMatches(Tile tile)
-    {
-        List<Tile> sameTypeItemsTiles = new List<Tile>();
-
-        Tile previous = this._board.GetTileByItemType(new Vector2(tile.position.x, tile.position.y - 1), tile.item.type);
-        Tile next = this._board.GetTileByItemType(new Vector2(tile.position.x, tile.position.y + 1), tile.item.type);
-
-        while (previous != null)
+        public override void OnEnter()
         {
-            sameTypeItemsTiles.Add(previous);
-            previous = this._board.GetTileByItemType(new Vector2(tile.position.x, previous.position.y - 1), tile.item.type);
+            base.OnEnter();
+
+            Debug.Log("Evaluating matches...");
+
+            this.ApplyMatch(this._board.ScanMatch(_board.swapedA));
+            this.ApplyMatch(this._board.ScanMatch(_board.swapedB));
+
+            Debug.Log(this._currentMatches.Count);
+
+            _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateInputCheck);
         }
 
-        while (next != null)
+        public override void OnExit()
         {
-            sameTypeItemsTiles.Add(next);
-            next = this._board.GetTileByItemType(new Vector2(tile.position.x, next.position.y + 1), tile.item.type);
-        }
-
-        if (sameTypeItemsTiles.Count >= 2)
-        {
-            // Match happened
-            sameTypeItemsTiles.Add(tile);
-            sameTypeItemsTiles = sameTypeItemsTiles.OrderBy(tile => tile.position.y).ToList<Tile>();
-            this._currentMatches.Add(new Match(sameTypeItemsTiles));
-        }
-        else
-        {
-            sameTypeItemsTiles.Clear();
-        }
-
-        DebugTiles(sameTypeItemsTiles, "Same Vertical Items Types:");
-    }
-
-    private void MatchesToMerge()
-    {
-        if (this._currentMatches.Count > 1)
-        {
-            for (int i = 0; i < this._currentMatches[0].size; i++)
+            base.OnExit();
+            this._currentMatches.Clear();
+            if (this._board.swapedA != null || this._board.swapedB != null)
             {
-
+                // TODO: Swap back
             }
         }
-    }
 
-    // Debug Stuff
-
-    private void DebugTiles(List<Tile> tiles, string title = "Debugging List:")
-    {
-        if (tiles.Count <= 0) return;
-
-        Debug.Log(title);
-
-        foreach (Tile dTile in tiles)
+        private void ApplyMatch(Match match)
         {
-            Debug.Log($"Tile [{dTile.position.x}][{dTile.position.y}] - {dTile.item.type}");
+            if (match == null) return;
+
+            foreach (Tile tile in match.tiles)
+            {
+                tile.item.Remove();
+            }
+        }
+
+
+        // Debug Stuff
+
+        private void DebugTiles(List<Tile> tiles, string title = "Debugging List:")
+        {
+            if (tiles.Count <= 0) return;
+
+            Debug.Log(title);
+
+            foreach (Tile dTile in tiles)
+            {
+                Debug.Log($"Tile [{dTile.position.x}][{dTile.position.y}] - {dTile.item.type}");
+            }
         }
     }
 }

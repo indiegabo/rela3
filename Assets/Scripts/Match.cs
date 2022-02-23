@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Match
+namespace IndieGabo.Rela3
 {
-    public List<Tile> tiles { get; private set; }
-
-    public Match(List<Tile> matchedTiles)
+    public class Match
     {
-        this.tiles = matchedTiles;
+        public List<Tile> tiles { get; private set; }
+
+        public Match(List<Tile> matchedTiles)
+        {
+            this.tiles = matchedTiles;
+        }
+
+        public int size => this.tiles.Count;
+
     }
-
-    public int size => this.tiles.Count;
-
 }

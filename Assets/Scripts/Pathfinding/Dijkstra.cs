@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
-
+using IndieGabo.Rela3;
 
 namespace IA
 {
     public class Dijkstra : Pathfinding
     {
         public int searchLength = 8;
-        private Vector2[] directions = new Vector2[4]{
-      Vector2.up,
-      Vector2.right,
-      Vector2.down,
-      Vector2.left
-    };
+        private Vector2[] directions = new Vector2[4]
+        {
+            Vector2.up,
+            Vector2.right,
+            Vector2.down,
+            Vector2.left
+        };
 
         private int findType;
         public override bool ValidateMovement(Tile from, Tile to)
