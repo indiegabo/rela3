@@ -216,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1193017238}
   - component: {fileID: 1193017237}
+  - component: {fileID: 1193017239}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -235,6 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd79e47a42b4ff54787e9d2c1846d378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemZDistanceFactor: 5
+  firstSpawnYDistanceFactor: 5
   _xSize: 8
   _ySize: 8
   _tileEvenPrefab: {fileID: 1139823289972959031, guid: 4ca231727e68b4c4192fa0e01866f33b, type: 3}
@@ -253,6 +256,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1193017239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193017236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff8df6cf1c56d046ac7dbd448c18a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 1193017237}
+  searchLength: 30
 --- !u!1 &1218125181
 GameObject:
   m_ObjectHideFlags: 0

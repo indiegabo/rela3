@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using IndieGabo.Rela3.Items;
 using UnityEngine;
+using IndieGabo.Rela3.Transitions;
 
 namespace IndieGabo.Rela3
 {
@@ -30,6 +31,24 @@ namespace IndieGabo.Rela3
             this.position = position;
             this.name = name;
             this.obj = obj;
+        }
+
+        public void RemoveItem()
+        {
+            if (this.item == null) return;
+
+            this.item.Remove();
+            this.item = null;
+        }
+
+        public void BringItem(Tile tile)
+        {
+
+            ITransition itemTransition = tile.item.GetComponent<ITransition>();
+            itemTransition.TransitionTo(this);
+
+            this.item = tile.item;
+            this.item.transform.parent = this.obj.transform;
         }
     }
 }

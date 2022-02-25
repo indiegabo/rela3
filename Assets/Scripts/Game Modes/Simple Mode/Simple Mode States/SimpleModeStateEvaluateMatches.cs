@@ -36,7 +36,14 @@ namespace IndieGabo.Rela3.GameModes
 
             Debug.Log(this._currentMatches.Count);
 
-            _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateInputCheck);
+            if (this._currentMatches.Count == 0)
+            {
+                _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateInputCheck);
+            }
+            else if (this._currentMatches.Count > 0)
+            {
+                _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateReordering);
+            }
         }
 
         public override void OnExit()
@@ -53,9 +60,11 @@ namespace IndieGabo.Rela3.GameModes
         {
             if (match == null) return;
 
+            this._currentMatches.Add(match);
+
             foreach (Tile tile in match.tiles)
             {
-                tile.item.Remove();
+                tile.RemoveItem();
             }
         }
 
