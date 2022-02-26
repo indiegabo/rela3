@@ -11,6 +11,7 @@ namespace IndieGabo.Rela3.Items
         [SerializeField] private List<Item> _itemsList;
         private List<ItemType> _itemTypes = new List<ItemType>();
         private static Dictionary<ItemType, Item> _items = new Dictionary<ItemType, Item>();
+        private Random _random = new Random();
 
         public void Initialize()
         {
@@ -30,6 +31,14 @@ namespace IndieGabo.Rela3.Items
             return _items.TryGetValue(itemType, out item) ? item : null;
         }
 
+        public InstantiableItem GetRandomItem()
+        {
+            ItemType itemType = this.RandomItemType();
+            Item item = _items.TryGetValue(itemType, out item) ? item : null;
+
+            return new InstantiableItem(item, itemType);
+        }
+
         public InstantiableItem GetRandomItem(List<ItemType> blockedTypes)
         {
             ItemType itemType = this.RandomItemType(blockedTypes);
@@ -38,11 +47,16 @@ namespace IndieGabo.Rela3.Items
             return new InstantiableItem(item, itemType);
         }
 
+        private ItemType RandomItemType()
+        {
+            return this._itemTypes.ToArray()[this._random.Next(this._itemTypes.Count)];
+        }
+
         private ItemType RandomItemType(List<ItemType> blockedTypes)
         {
             Random random = new Random();
             ItemType[] allowedItemTypes = this._itemTypes.Where(blockedType => blockedTypes.Contains(blockedType) == false).ToArray<ItemType>();
-            return (ItemType)allowedItemTypes.GetValue(random.Next(allowedItemTypes.Length));
+            return (ItemType)allowedItemTypes.GetValue(this._random.Next(allowedItemTypes.Length));
         }
     }
 

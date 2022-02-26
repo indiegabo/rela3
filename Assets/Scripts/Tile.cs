@@ -43,7 +43,6 @@ namespace IndieGabo.Rela3
 
         public void BringItemFrom(Tile tile)
         {
-
             ITransition itemTransition = tile.item.GetComponent<ITransition>();
             itemTransition.TransitionTo(this);
 

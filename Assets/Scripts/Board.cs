@@ -25,6 +25,8 @@ namespace IndieGabo.Rela3
         public int columns => this._xSize;
         public int rows => this._ySize;
 
+        public int instatiateRowPos => this._ySize;
+
         private void Awake()
         {
             this.dijkstra = GetComponent<Dijkstra>();
@@ -62,6 +64,11 @@ namespace IndieGabo.Rela3
         {
             this.tiles.TryGetValue(position, out Tile tile);
             return tile;
+        }
+
+        public Tile LastColumnTile(int x)
+        {
+            return this.GetTile(new Vector2(x, this._ySize - 1));
         }
 
         public Tile GetTileByItemType(Vector2 position, ItemType itemType)

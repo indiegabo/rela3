@@ -39,14 +39,14 @@ namespace IndieGabo.Rela3.Items
             {
                 for (int x = 0; x < board.rows; x++)
                 {
-                    this.SpawnRandomItem(board.GetTile(new Vector2(x, y)));
+                    this.FirstSpawnRandomItem(board.GetTile(new Vector2(x, y)));
                     yield return new WaitForSeconds(this._populateSpawnDelay);
                 }
             }
             this._currentBoard = null;
         }
 
-        public void SpawnRandomItem(Tile tile)
+        public void FirstSpawnRandomItem(Tile tile)
         {
             if (this._currentBoard == null) return;
 
@@ -81,6 +81,22 @@ namespace IndieGabo.Rela3.Items
                 return tileMinus1.item;
             }
             return null;
+        }
+
+        public void SpawnRandomItemOnBoard(Tile tile, Board board)
+        {
+
+            Vector3 spawnPos = new Vector3(
+                tile.position.x,
+                tile.position.y,
+                board.transform.position.z - board.itemZDistanceFactor
+            );
+
+            InstantiableItem instatiableItem = this._itemProvider.GetRandomItem();
+            Debug.Log($" O random foi: {instatiableItem.itemPrefab.name}");
+
+            Item item = Instantiate(instatiableItem.itemPrefab, spawnPos, Quaternion.identity, tile.obj.transform);
+            tile.item = item;
         }
     }
 }

@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using IndieGabo.Rela3.Items;
 
 namespace IndieGabo.Rela3.GameModes
 {
     public class SimpleModeStateReordering : SimpleModeState
     {
         private Board _board;
+        private ItemFactory _itemFactory;
 
         public SimpleModeStateReordering(SimpleMode simpleMode) : base(simpleMode)
         {
             this._board = simpleMode.core.board;
+            this._itemFactory = simpleMode.core.itemFactory;
         }
 
         public override void Tick()
@@ -28,6 +31,7 @@ namespace IndieGabo.Rela3.GameModes
             base.OnEnter();
             Debug.Log("Entered Reordering");
             this.Reorder();
+            this._simpleMode.ChangeState(this._simpleMode.simpleModeStateInputCheck);
         }
 
         public override void OnExit()
@@ -63,33 +67,56 @@ namespace IndieGabo.Rela3.GameModes
 
             if (abovePosition.y >= this._board.rows)
             {
-                return;
-            }
-
-            Tile aboveTile = this._board.GetTile(abovePosition);
-
-            while (aboveTile != null && aboveTile.item == null)
-            {
-                abovePosition = aboveTile.position + Vector2.up;
-
-                if (abovePosition.y >= this._board.rows)
-                {
-                    aboveTile = null;
-                }
-                else
-                {
-                    aboveTile = this._board.GetTile(abovePosition);
-                }
-
-            }
-
-            if (aboveTile == null)
-            {
-                return;
+                this.InstantiateAndBring(tile);
             }
             else
             {
-                tile.BringItemFrom(aboveTile);
+
+                Tile aboveTile = this._board.GetTile(abovePosition);
+
+                while (aboveTile != null && aboveTile.item == null)
+                {
+                    abovePosition = aboveTile.position + Vector2.up;
+
+                    if (abovePosition.y >= this._board.rows)
+                    {
+                        aboveTile = null;
+                    }
+                    else
+                    {
+                        aboveTile = this._board.GetTile(abovePosition);
+                    }
+
+                }
+
+                if (aboveTile == null)
+                {
+                    this.InstantiateAndBring(tile);
+                }
+                else
+                {
+                    tile.BringItemFrom(aboveTile);
+                }
+
+            }
+        }
+
+        private void InstantiateAndBring(Tile tile)
+        {
+            Tile lastColumnTile = this._board.LastColumnTile((int)tile.position.x);
+
+            if (tile.position != lastColumnTile.position)
+            {
+
+                Debug.Log($"Last Tile at [{lastColumnTile.position.x}][{lastColumnTile.position.y}]");
+                this._itemFactory.SpawnRandomItemOnBoard(lastColumnTile, this._board);
+
+                tile.BringItemFrom(lastColumnTile);
+
+            }
+            else
+            {
+                this._itemFactory.SpawnRandomItemOnBoard(lastColumnTile, this._board);
             }
         }
     }
