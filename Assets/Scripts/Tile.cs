@@ -41,7 +41,7 @@ namespace IndieGabo.Rela3
             this.item = null;
         }
 
-        public void BringItem(Tile tile)
+        public void BringItemFrom(Tile tile)
         {
 
             ITransition itemTransition = tile.item.GetComponent<ITransition>();
@@ -49,6 +49,7 @@ namespace IndieGabo.Rela3
 
             this.item = tile.item;
             this.item.transform.parent = this.obj.transform;
+            tile.item = null;
         }
     }
 }

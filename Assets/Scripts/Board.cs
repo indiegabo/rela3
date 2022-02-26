@@ -22,8 +22,8 @@ namespace IndieGabo.Rela3
 
         public Dictionary<Vector2, Tile> tiles { get; private set; }
 
-        public int xSize => this._xSize;
-        public int ySize => this._ySize;
+        public int columns => this._xSize;
+        public int rows => this._ySize;
 
         private void Awake()
         {
@@ -33,9 +33,9 @@ namespace IndieGabo.Rela3
 
         public void Initialize()
         {
-            for (int x = 0; x < xSize; x++)
+            for (int x = 0; x < rows; x++)
             {
-                for (int y = 0; y < ySize; y++)
+                for (int y = 0; y < rows; y++)
                 {
                     // Instantiate tile
                     Vector2 position = new Vector2(x, y);
