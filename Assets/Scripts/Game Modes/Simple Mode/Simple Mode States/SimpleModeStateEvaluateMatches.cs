@@ -8,7 +8,6 @@ namespace IndieGabo.Rela3.GameModes
     public class SimpleModeStateEvaluateMatches : SimpleModeState
     {
         private Board _board;
-        private List<Match> _currentMatches = new List<Match>();
 
         public SimpleModeStateEvaluateMatches(SimpleMode simpleMode) : base(simpleMode)
         {
@@ -31,17 +30,28 @@ namespace IndieGabo.Rela3.GameModes
 
             Debug.Log("Evaluating matches...");
 
-            this.ApplyMatch(this._board.ScanMatch(_board.swapedA));
-            this.ApplyMatch(this._board.ScanMatch(_board.swapedB));
+            // Evaluating possible matches. Case matches are found we put them in 
+            // _currenMatches
+            this._board.EvaluateMatch(this._board.swapedA);
+            this._board.EvaluateMatch(this._board.swapedB);
 
-            Debug.Log(this._currentMatches.Count);
+            Debug.Log(this._board.currentMatches.Count);
 
-            if (this._currentMatches.Count == 0)
+            if (this._board.currentMatches.Count == 0)
             {
+                // Case there is no match, swap back and return to Input Check
+                this._board.SwapTilesItems(this._board.swapedA, this._board.swapedB);
                 _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateInputCheck);
+
             }
-            else if (this._currentMatches.Count > 0)
+            else if (this._board.currentMatches.Count > 0)
             {
+                // Case there is at least one match, apply matches and move state to
+                // Reordering.
+                foreach (Match match in this._board.currentMatches)
+                {
+                    this._board.ApplyMatch(match);
+                }
                 _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateReordering);
             }
         }
@@ -49,23 +59,6 @@ namespace IndieGabo.Rela3.GameModes
         public override void OnExit()
         {
             base.OnExit();
-            this._currentMatches.Clear();
-            if (this._board.swapedA != null || this._board.swapedB != null)
-            {
-                // TODO: Swap back
-            }
-        }
-
-        private void ApplyMatch(Match match)
-        {
-            if (match == null) return;
-
-            this._currentMatches.Add(match);
-
-            foreach (Tile tile in match.tiles)
-            {
-                tile.RemoveItem();
-            }
         }
 
 

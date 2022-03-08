@@ -31,7 +31,7 @@ namespace IndieGabo.Rela3.GameModes
             base.OnEnter();
             Debug.Log("Entered Reordering");
             this.Reorder();
-            this._simpleMode.ChangeState(this._simpleMode.simpleModeStateInputCheck);
+            this._simpleMode.ChangeState(this._simpleMode.simpleModeStateEvaluateMatches);
         }
 
         public override void OnExit()

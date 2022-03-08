@@ -37,6 +37,7 @@ namespace IndieGabo.Rela3.GameModes
         public override void OnEnter()
         {
             Debug.Log("Entered Input Check State");
+            this._board.currentMatches.Clear();
             InputHandler.onStartGrab += this.OnGrabStart;
             InputHandler.onFinishedGrab += this.OnGrabFinish;
         }

@@ -9,8 +9,8 @@ namespace IndieGabo.Rela3
     public class Board : MonoBehaviour
     {
         [Header("Config")]
-        [SerializeField] [Range(1f, 10f)] public float itemZDistanceFactor = 5f;
-        [SerializeField] [Range(1f, 10f)] public float firstSpawnYDistanceFactor = 5f;
+        [SerializeField][Range(1f, 10f)] public float itemZDistanceFactor = 5f;
+        [SerializeField][Range(1f, 10f)] public float firstSpawnYDistanceFactor = 5f;
         [SerializeField] private int _xSize = 8;
         [SerializeField] private int _ySize = 8;
         [SerializeField] private GameObject _tileEvenPrefab;
@@ -18,6 +18,7 @@ namespace IndieGabo.Rela3
 
         public Tile swapedA;
         public Tile swapedB;
+        public List<Match> currentMatches = new List<Match>();
         public Dijkstra dijkstra { get; private set; }
 
         public Dictionary<Vector2, Tile> tiles { get; private set; }
@@ -109,6 +110,26 @@ namespace IndieGabo.Rela3
             else
             {
                 return null;
+            }
+        }
+
+
+        public void EvaluateMatch(Tile tile)
+        {
+            Match match = this.ScanMatch(tile);
+
+            if (match == null) return;
+
+            this.currentMatches.Add(match);
+        }
+
+        public void ApplyMatch(Match match)
+        {
+            if (match == null) return;
+
+            foreach (Tile tile in match.tiles)
+            {
+                tile.RemoveItem();
             }
         }
 
