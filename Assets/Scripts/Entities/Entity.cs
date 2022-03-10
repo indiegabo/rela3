@@ -19,6 +19,17 @@ public abstract class Entity<T> : MonoBehaviour where T : EntityCore
         this.stateMachine = new StateMachine();
     }
 
+
+    protected virtual void Update()
+    {
+        this.stateMachine.Tick();
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        this.stateMachine.FixedTick();
+    }
+
     /// <summary>
     /// Changes Entity active state
     /// </summary>
