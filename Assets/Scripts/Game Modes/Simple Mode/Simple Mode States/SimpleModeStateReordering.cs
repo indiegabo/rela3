@@ -9,6 +9,7 @@ namespace IndieGabo.Rela3.GameModes
     {
         private Board _board;
         private ItemFactory _itemFactory;
+        private List<Match> _matchesOnEnter = new List<Match>();
 
         public SimpleModeStateReordering(SimpleMode simpleMode) : base(simpleMode)
         {
@@ -30,13 +31,25 @@ namespace IndieGabo.Rela3.GameModes
         {
             base.OnEnter();
             Debug.Log("Entered Reordering");
+            this._matchesOnEnter = new List<Match>(this._board.currentMatches);
             this.Reorder();
-            this._simpleMode.ChangeState(this._simpleMode.simpleModeStateEvaluateMatches);
+            this._board.currentMatches.Clear();
+
+            if (this.EvaluateNewMatches())
+            {
+                this._simpleMode.ChangeState(this._simpleMode.simpleModeStateMatchHandling);
+            }
+            else
+            {
+                this._simpleMode.ChangeState(this._simpleMode.simpleModeStateInputCheck);
+            }
+
         }
 
         public override void OnExit()
         {
             base.OnExit();
+            this._matchesOnEnter.Clear();
         }
 
         private void Reorder()
@@ -107,17 +120,28 @@ namespace IndieGabo.Rela3.GameModes
 
             if (tile.position != lastColumnTile.position)
             {
-
-                Debug.Log($"Last Tile at [{lastColumnTile.position.x}][{lastColumnTile.position.y}]");
                 this._itemFactory.SpawnRandomItemOnBoard(lastColumnTile, this._board);
-
                 tile.BringItemFrom(lastColumnTile);
-
             }
             else
             {
                 this._itemFactory.SpawnRandomItemOnBoard(lastColumnTile, this._board);
             }
+        }
+
+        private bool EvaluateNewMatches()
+        {
+            for (int x = 0; x < this._board.rows; x++)
+            {
+                for (int y = 0; y < this._board.columns; y++)
+                {
+                    Vector2 pos = new Vector2(x, y);
+                    Tile tile = this._board.GetTile(pos);
+                    this._board.EvaluateMatch(tile);
+                }
+            }
+
+            return this._board.currentMatches.Count > 0;
         }
     }
 

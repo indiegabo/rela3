@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using IndieGabo.Rela3.StateManagement;
+using System.Threading.Tasks;
+
 namespace IndieGabo.Rela3.GameModes
 {
     public class SimpleModeStateInputCheck : SimpleModeState
     {
+        private static int DelayTimeInMiliseconds = 200;
 
         private Board _board;
         private Vector2 _grabStartedAt;
@@ -67,12 +70,32 @@ namespace IndieGabo.Rela3.GameModes
             //If any of the tiles is null, or they are the same, do nothing
             if (from == null || to == null || (from.position == to.position)) return;
 
-            this._board.swapedA = from;
-            this._board.swapedB = to;
-
             this._simpleMode.core.board.SwapTilesItems(from, to);
 
-            this._simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateEvaluateMatches);
+            this.HoldEvaluation(from, to);
+        }
+
+        private bool EvaluateMatches(Tile from, Tile to)
+        {
+
+            this._board.EvaluateMatch(from);
+            this._board.EvaluateMatch(to);
+
+            return this._board.currentMatches.Count > 0;
+        }
+
+        private async void HoldEvaluation(Tile from, Tile to)
+        {
+            await Task.Delay(DelayTimeInMiliseconds);
+
+            if (this.EvaluateMatches(from, to))
+            {
+                this._simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateMatchHandling);
+            }
+            else
+            {
+                this._board.SwapTilesItems(from, to);
+            }
         }
     }
 }

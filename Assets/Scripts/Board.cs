@@ -16,8 +16,6 @@ namespace IndieGabo.Rela3
         [SerializeField] private GameObject _tileEvenPrefab;
         [SerializeField] private GameObject _tileOddPrefab;
 
-        public Tile swapedA;
-        public Tile swapedB;
         public List<Match> currentMatches = new List<Match>();
         public Dijkstra dijkstra { get; private set; }
 
@@ -118,7 +116,11 @@ namespace IndieGabo.Rela3
         {
             Match match = this.ScanMatch(tile);
 
-            if (match == null) return;
+            if (match == null)
+            {
+                Debug.Log($"Pro Tile [{tile.position.x}][{tile.position.y}] não foi encontrado match");
+                return;
+            }
 
             this.currentMatches.Add(match);
         }

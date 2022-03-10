@@ -5,11 +5,12 @@ using System.Linq;
 
 namespace IndieGabo.Rela3.GameModes
 {
-    public class SimpleModeStateEvaluateMatches : SimpleModeState
+    public class SimpleModeStateMatchHandling : SimpleModeState
     {
         private Board _board;
+        private bool matchsToHandle => this._board.currentMatches.Count > 0;
 
-        public SimpleModeStateEvaluateMatches(SimpleMode simpleMode) : base(simpleMode)
+        public SimpleModeStateMatchHandling(SimpleMode simpleMode) : base(simpleMode)
         {
             this._board = simpleMode.core.board;
         }
@@ -31,34 +32,31 @@ namespace IndieGabo.Rela3.GameModes
             Debug.Log("Evaluating matches...");
 
             // Evaluating possible matches. Case matches are found we put them in 
-            // _currenMatches
-            this._board.EvaluateMatch(this._board.swapedA);
-            this._board.EvaluateMatch(this._board.swapedB);
 
-            Debug.Log(this._board.currentMatches.Count);
-
-            if (this._board.currentMatches.Count == 0)
+            if (matchsToHandle)
             {
-                // Case there is no match, swap back and return to Input Check
-                this._board.SwapTilesItems(this._board.swapedA, this._board.swapedB);
-                _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateInputCheck);
-
+                // Handle matches
+                Debug.Log("Entrou no Handle Matches");
+                this.HandleMatches();
+                this._simpleMode.ChangeState(this._simpleMode.simpleModeStateReordering);
             }
-            else if (this._board.currentMatches.Count > 0)
+            else
             {
-                // Case there is at least one match, apply matches and move state to
-                // Reordering.
-                foreach (Match match in this._board.currentMatches)
-                {
-                    this._board.ApplyMatch(match);
-                }
-                _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateReordering);
+                this._simpleMode.ChangeState(this._simpleMode.simpleModeStateInputCheck);
             }
         }
 
         public override void OnExit()
         {
             base.OnExit();
+        }
+
+        private void HandleMatches()
+        {
+            foreach (Match match in this._board.currentMatches)
+            {
+                this._board.ApplyMatch(match);
+            }
         }
 
 
