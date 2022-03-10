@@ -9,21 +9,22 @@ namespace IndieGabo.Rela3
     public class Board : MonoBehaviour
     {
         [Header("Config")]
-        [SerializeField] [Range(1f, 10f)] public float itemZDistanceFactor = 5f;
-        [SerializeField] [Range(1f, 10f)] public float firstSpawnYDistanceFactor = 5f;
+        [SerializeField][Range(1f, 10f)] public float itemZDistanceFactor = 5f;
+        [SerializeField][Range(1f, 10f)] public float firstSpawnYDistanceFactor = 5f;
         [SerializeField] private int _xSize = 8;
         [SerializeField] private int _ySize = 8;
         [SerializeField] private GameObject _tileEvenPrefab;
         [SerializeField] private GameObject _tileOddPrefab;
 
-        public Tile swapedA;
-        public Tile swapedB;
+        public List<Match> currentMatches = new List<Match>();
         public Dijkstra dijkstra { get; private set; }
 
         public Dictionary<Vector2, Tile> tiles { get; private set; }
 
-        public int xSize => this._xSize;
-        public int ySize => this._ySize;
+        public int columns => this._xSize;
+        public int rows => this._ySize;
+
+        public int instatiateRowPos => this._ySize;
 
         private void Awake()
         {
@@ -33,9 +34,9 @@ namespace IndieGabo.Rela3
 
         public void Initialize()
         {
-            for (int x = 0; x < xSize; x++)
+            for (int x = 0; x < rows; x++)
             {
-                for (int y = 0; y < ySize; y++)
+                for (int y = 0; y < rows; y++)
                 {
                     // Instantiate tile
                     Vector2 position = new Vector2(x, y);
@@ -62,6 +63,11 @@ namespace IndieGabo.Rela3
         {
             this.tiles.TryGetValue(position, out Tile tile);
             return tile;
+        }
+
+        public Tile LastColumnTile(int x)
+        {
+            return this.GetTile(new Vector2(x, this._ySize - 1));
         }
 
         public Tile GetTileByItemType(Vector2 position, ItemType itemType)
@@ -102,6 +108,30 @@ namespace IndieGabo.Rela3
             else
             {
                 return null;
+            }
+        }
+
+
+        public void EvaluateMatch(Tile tile)
+        {
+            Match match = this.ScanMatch(tile);
+
+            if (match == null)
+            {
+                Debug.Log($"Pro Tile [{tile.position.x}][{tile.position.y}] não foi encontrado match");
+                return;
+            }
+
+            this.currentMatches.Add(match);
+        }
+
+        public void ApplyMatch(Match match)
+        {
+            if (match == null) return;
+
+            foreach (Tile tile in match.tiles)
+            {
+                tile.RemoveItem();
             }
         }
 

@@ -20,7 +20,7 @@ namespace IA
         public override bool ValidateMovement(Tile from, Tile to)
         {
             return !(
-              to.item.type != from.item.type ||
+              to.item?.type != from.item?.type ||
               to.costFromOrigin > searchLength
             );
         }

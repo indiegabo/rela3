@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace IndieGabo.Rela3.GameModes
 {
-    public class SimpleModeStateEvaluateMatches : SimpleModeState
+    public class SimpleModeStateMatchHandling : SimpleModeState
     {
         private Board _board;
-        private List<Match> _currentMatches = new List<Match>();
+        private bool matchsToHandle => this._board.currentMatches.Count > 0;
 
-        public SimpleModeStateEvaluateMatches(SimpleMode simpleMode) : base(simpleMode)
+        public SimpleModeStateMatchHandling(SimpleMode simpleMode) : base(simpleMode)
         {
             this._board = simpleMode.core.board;
         }
@@ -31,40 +31,31 @@ namespace IndieGabo.Rela3.GameModes
 
             Debug.Log("Evaluating matches...");
 
-            this.ApplyMatch(this._board.ScanMatch(_board.swapedA));
-            this.ApplyMatch(this._board.ScanMatch(_board.swapedB));
+            // Evaluating possible matches. Case matches are found we put them in 
 
-            Debug.Log(this._currentMatches.Count);
-
-            if (this._currentMatches.Count == 0)
+            if (matchsToHandle)
             {
-                _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateInputCheck);
+                // Handle matches
+                Debug.Log("Entrou no Handle Matches");
+                this.HandleMatches();
+                this._simpleMode.ChangeState(this._simpleMode.simpleModeStateReordering);
             }
-            else if (this._currentMatches.Count > 0)
+            else
             {
-                _simpleMode.stateMachine.SetActiveState(_simpleMode.simpleModeStateReordering);
+                this._simpleMode.ChangeState(this._simpleMode.simpleModeStateInputCheck);
             }
         }
 
         public override void OnExit()
         {
             base.OnExit();
-            this._currentMatches.Clear();
-            if (this._board.swapedA != null || this._board.swapedB != null)
-            {
-                // TODO: Swap back
-            }
         }
 
-        private void ApplyMatch(Match match)
+        private void HandleMatches()
         {
-            if (match == null) return;
-
-            this._currentMatches.Add(match);
-
-            foreach (Tile tile in match.tiles)
+            foreach (Match match in this._board.currentMatches)
             {
-                tile.RemoveItem();
+                this._board.ApplyMatch(match);
             }
         }
 
