@@ -59,11 +59,13 @@ namespace IndieGabo.Rela3.GameModes
 
         private async void HandleMatches()
         {
+
             foreach (Match match in this._board.currentMatches)
             {
-                this._board.ApplyMatch(match);
-                await Task.Delay(100);
+                await this._board.ApplyMatch(match);
+                await Task.Delay(250);
             }
+
             this.matchesHandled = true;
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using IndieGabo.Rela3.Items;
+using System.Threading.Tasks;
 
 namespace IndieGabo.Rela3.GameModes
 {
@@ -10,6 +11,7 @@ namespace IndieGabo.Rela3.GameModes
         private Board _board;
         private ItemFactory _itemFactory;
         private List<Match> _matchesOnEnter = new List<Match>();
+        private bool _reordering = false;
 
         public SimpleModeStateReordering(SimpleMode simpleMode) : base(simpleMode)
         {
@@ -25,23 +27,28 @@ namespace IndieGabo.Rela3.GameModes
         public override void FixedTick()
         {
             base.FixedTick();
+
+            if (!_reordering)
+            {
+                this._board.currentMatches.Clear();
+
+                if (this.EvaluateNewMatches())
+                {
+                    this._simpleMode.ChangeState(this._simpleMode.simpleModeStateMatchHandling);
+                }
+                else
+                {
+                    this._simpleMode.ChangeState(this._simpleMode.simpleModeStateInputCheck);
+                }
+            }
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
             this._matchesOnEnter = new List<Match>(this._board.currentMatches);
+            this._reordering = true;
             this.Reorder();
-            this._board.currentMatches.Clear();
-
-            if (this.EvaluateNewMatches())
-            {
-                this._simpleMode.ChangeState(this._simpleMode.simpleModeStateMatchHandling);
-            }
-            else
-            {
-                this._simpleMode.ChangeState(this._simpleMode.simpleModeStateInputCheck);
-            }
 
         }
 
@@ -51,21 +58,27 @@ namespace IndieGabo.Rela3.GameModes
             this._matchesOnEnter.Clear();
         }
 
-        private void Reorder()
+        private async void Reorder()
         {
+            Task[] tasks = new Task[this._board.columns];
 
             for (int column = 0; column < this._board.columns; column++)
             {
-                this.FixColumn(column);
+                tasks[column] = this.FixColumn(column);
             }
+
+            await Task.WhenAll(tasks);
+
+            this._reordering = false;
         }
 
-        private void FixColumn(int column)
+        private async Task FixColumn(int column)
         {
             for (int row = 0; row < this._board.rows; row++)
             {
                 Vector2 tilePos = new Vector2(column, row);
                 this.MoveTile(this._board.GetTile(tilePos));
+                await Task.Yield();
             }
         }
 

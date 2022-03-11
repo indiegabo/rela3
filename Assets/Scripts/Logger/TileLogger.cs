@@ -18,7 +18,6 @@ public class TileLogger : Logger
         Debug.Log($"<color={whiteHEX}>Tile: </color> <color={successHEX}>[{tile.position.x}][{tile.position.y}]</color>");
         Debug.Log($"<color={whiteHEX}>Item: </color> <color={successHEX}>{tile.item.name}</color>");
         Debug.Log($"<color={warningHEX}>-------------------</color>");
-
     }
 
 

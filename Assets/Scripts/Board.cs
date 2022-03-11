@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using IA;
 using IndieGabo.Rela3.Items;
+using System.Threading.Tasks;
 
 namespace IndieGabo.Rela3
 {
@@ -125,7 +126,7 @@ namespace IndieGabo.Rela3
             this.currentMatches.Add(match);
         }
 
-        public void ApplyMatch(Match match)
+        public async Task ApplyMatch(Match match)
         {
             if (match == null) return;
 
@@ -133,6 +134,8 @@ namespace IndieGabo.Rela3
             {
                 tile.RemoveItem();
             }
+
+            await Task.Yield();
         }
     }
 }
