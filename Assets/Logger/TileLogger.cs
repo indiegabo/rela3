@@ -15,8 +15,8 @@ public class TileLogger : Logger
     public void LogTile(Tile tile, string message = null)
     {
         Debug.Log($"<color={warningHEX}>-------------------</color>");
-        Debug.Log($"Tile <color={successHEX}>[{tile.position.x}][{tile.position.y}]</color>");
-        Debug.Log($"Item: <color={successHEX}>{tile.item.name}</color>");
+        Debug.Log($"<color={whiteHEX}>Tile: </color> <color={successHEX}>[{tile.position.x}][{tile.position.y}]</color>");
+        Debug.Log($"<color={whiteHEX}>Item: </color> <color={successHEX}>{tile.item.name}</color>");
         Debug.Log($"<color={warningHEX}>-------------------</color>");
 
     }

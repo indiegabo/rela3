@@ -152,7 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 079a1713b15e3964e93153966d818ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_settings: {fileID: 11400000, guid: c15c54d550507484ebc4a21bc309760a, type: 2}
+  m_shouldLog: 1
+  m_successColor: {r: 0.16313633, g: 0.735849, b: 0.41811115, a: 1}
+  m_warningColor: {r: 0.754717, g: 0.7350883, b: 0.18155926, a: 1}
+  m_dangerColor: {r: 0.7830189, g: 0.15881987, b: 0.15881987, a: 1}
 --- !u!4 &99761731
 Transform:
   m_ObjectHideFlags: 0
@@ -323,7 +326,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306f0444e1a9a5144959930b2e1b35db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_settings: {fileID: 11400000, guid: d67e694bc42ec0e4c8df34ef3185c824, type: 2}
+  m_shouldLog: 1
+  m_successColor: {r: 0.16731933, g: 0.754717, b: 0.42883196, a: 1}
+  m_warningColor: {r: 0.754717, g: 0.7350883, b: 0.18155926, a: 1}
+  m_dangerColor: {r: 1, g: 0.3820755, b: 0.3820755, a: 1}
 --- !u!4 &1150553909
 Transform:
   m_ObjectHideFlags: 0

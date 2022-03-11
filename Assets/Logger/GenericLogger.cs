@@ -13,19 +13,19 @@ public class GenericLogger : Logger
     }
     public void Success(string message, Object sender = null)
     {
-        if (!m_settings.shouldLog) return;
+        if (!m_shouldLog) return;
         Log(message, successHEX, sender);
     }
 
     public void Warning(string message, Object sender = null)
     {
-        if (!m_settings.shouldLog) return;
+        if (!m_shouldLog) return;
         Log(message, warningHEX, sender);
     }
 
     public void Danger(string message, Object sender = null)
     {
-        if (!m_settings.shouldLog) return;
+        if (!m_shouldLog) return;
         Log(message, dangerHEX, sender);
     }
 
