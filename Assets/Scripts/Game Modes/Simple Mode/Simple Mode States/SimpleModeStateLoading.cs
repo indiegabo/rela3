@@ -36,13 +36,13 @@ namespace IndieGabo.Rela3.GameModes
             Board board = this._simpleMode.core.board;
 
             board.Initialize();
-            Logger.Instance?.Success($"Entrou no initialize");
+            GenericLogger.I?.Warning($"Entrou no initialize");
 
             itemFactory.Initialize();
-            Debug.Log("Factory Initialized");
+            GenericLogger.I?.Warning($"Factory Initialized");
 
             itemFactory.PopulateBoard(board);
-            Debug.Log("Board Populated");
+            GenericLogger.I?.Warning($"Board Populated");
 
             this._simpleMode.ChangeState(this._simpleMode.simpleModeStateInputCheck);
         }

@@ -7,7 +7,7 @@ namespace IndieGabo.Rela3.Items
     public class ItemFactory : MonoBehaviour
     {
         [Header("Config")]
-        [SerializeField] [Range(0.01f, 0.1f)] private float _populateSpawnDelay = 0.05f;
+        [SerializeField][Range(0.01f, 0.1f)] private float _populateSpawnDelay = 0.05f;
 
         // Needed components
         private ItemProvider _itemProvider;
@@ -93,7 +93,6 @@ namespace IndieGabo.Rela3.Items
             );
 
             InstantiableItem instatiableItem = this._itemProvider.GetRandomItem();
-            Debug.Log($" O random foi: {instatiableItem.itemPrefab.name}");
 
             Item item = Instantiate(instatiableItem.itemPrefab, spawnPos, Quaternion.identity, tile.obj.transform);
             tile.item = item;

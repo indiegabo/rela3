@@ -118,7 +118,7 @@ namespace IndieGabo.Rela3
 
             if (match == null)
             {
-                Debug.Log($"Pro Tile [{tile.position.x}][{tile.position.y}] não foi encontrado match");
+                TileLogger.I?.LogTile(tile, $"");
                 return;
             }
 
@@ -132,19 +132,6 @@ namespace IndieGabo.Rela3
             foreach (Tile tile in match.tiles)
             {
                 tile.RemoveItem();
-            }
-        }
-
-        // Debug Stuff
-        private void DebugTiles(List<Tile> tiles, string title = "Debugging List:")
-        {
-            if (tiles.Count <= 0) return;
-
-            Debug.Log(title);
-
-            foreach (Tile dTile in tiles)
-            {
-                Debug.Log($"Tile [{dTile.position.x}][{dTile.position.y}] - {dTile.item.type}");
             }
         }
     }

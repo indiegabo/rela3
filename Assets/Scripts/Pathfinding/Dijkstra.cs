@@ -66,13 +66,13 @@ namespace IA
 
         public List<Tile> FindPath(Tile from)
         {
-            Debug.Log("Initiating Search");
+            GenericLogger.I?.Warning($"Initiating Dijkstra Search");
             return Search(from, ValidateMovement);
         }
 
         public List<Tile> FindPath(Tile from, Func<Tile, Tile, bool> Condition)
         {
-            Debug.Log("Initiating Search");
+            GenericLogger.I?.Warning($"Initiating Dijkstra Search");
             return Search(from, Condition);
         }
 

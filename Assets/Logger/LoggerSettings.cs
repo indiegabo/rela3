@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewLoggerSettings", menuName = "Logger/LoggerSettings")]
+[CreateAssetMenu(fileName = "NewLoggerSettings", menuName = "Logger/Settings")]
 public class LoggerSettings : ScriptableObject
 {
-    [SerializeField] private bool m_shouldLog = false;
-    [SerializeField] private Color m_fallbackColor;
-    [SerializeField] private Color m_successColor;
-    [SerializeField] private Color m_errorColor;
-    [SerializeField] private Color m_warningColor;
-    public bool shouldLog => m_shouldLog;
+    [Header("Settings")]
+    [SerializeField] protected bool m_shouldLog = true;
 
-    public Color fallbackColor => m_fallbackColor != null ? m_fallbackColor : new Color(38f, 0, 57f);
-    public Color successColor => m_successColor != null ? m_successColor : fallbackColor;
-    public Color errorColor => m_errorColor != null ? m_errorColor : fallbackColor;
-    public Color warningColor => m_warningColor != null ? m_warningColor : fallbackColor;
+    [Header("Colors")]
+    [SerializeField] protected Color m_successColor = new Color(60f, 255f, 146f); // Light Green
+    [SerializeField] protected Color m_warningColor = new Color(255f, 247f, 60f); // Light Yellow
+    [SerializeField] protected Color m_dangerColor = new Color(255f, 60f, 60f); // Light Red
+
+    public bool shouldLog => m_shouldLog;
+    public Color successColor => m_successColor;
+    public Color warningColor => m_warningColor;
+    public Color dangerColor => m_dangerColor;
 }
