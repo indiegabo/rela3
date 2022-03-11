@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81efa32271c9d54c8ddb8eaec3de55b, type: 3}
+  m_Name: DefaultLoggerSettings
+  m_EditorClassIdentifier: 
+  m_shouldLog: 1
+  m_fallbackColor: {r: 0.28952965, g: 0, b: 0.7169812, a: 0}
+  m_successColor: {r: 0.04472231, g: 0.6320754, b: 0.08008306, a: 0}
+  m_errorColor: {r: 0.8113208, g: 0.049750824, b: 0.15022102, a: 0}
+  m_warningColor: {r: 0.8207547, g: 0.7070867, b: 0.0038714937, a: 0}

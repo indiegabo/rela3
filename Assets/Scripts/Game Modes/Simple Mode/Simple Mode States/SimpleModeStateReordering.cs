@@ -30,7 +30,6 @@ namespace IndieGabo.Rela3.GameModes
         public override void OnEnter()
         {
             base.OnEnter();
-            Debug.Log("Entered Reordering");
             this._matchesOnEnter = new List<Match>(this._board.currentMatches);
             this.Reorder();
             this._board.currentMatches.Clear();

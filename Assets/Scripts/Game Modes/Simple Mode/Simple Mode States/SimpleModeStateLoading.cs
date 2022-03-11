@@ -36,7 +36,7 @@ namespace IndieGabo.Rela3.GameModes
             Board board = this._simpleMode.core.board;
 
             board.Initialize();
-            Debug.Log("Board Initialized");
+            Logger.Instance?.Success($"Entrou no initialize");
 
             itemFactory.Initialize();
             Debug.Log("Factory Initialized");
