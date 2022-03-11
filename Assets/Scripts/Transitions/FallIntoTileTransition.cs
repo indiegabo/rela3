@@ -32,7 +32,7 @@ namespace IndieGabo.Rela3.Transitions
         public void TransitionTo(Tile tile)
         {
             StartCoroutine(Move(tile.position));
-            StartCoroutine(Scale());
+            // StartCoroutine(Scale());
         }
 
 
@@ -46,6 +46,7 @@ namespace IndieGabo.Rela3.Transitions
                 yield return null;
             }
         }
+
         IEnumerator Scale()
         {
             // Remember to remove the setdelay
