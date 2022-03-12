@@ -119,7 +119,7 @@ namespace IndieGabo.Rela3
 
             if (match == null)
             {
-                TileLogger.I?.LogTile(tile, $"");
+                // TileLogger.I?.LogTile(tile, $"");
                 return;
             }
 

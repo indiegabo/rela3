@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.indiegabo.glogger": "git@github.com:indiegabo/GLogger.git",
     "com.ricardogodoy.hierarchyseparator": "git@github.com:RicardoQLG/HierarchySeparator.git",
     "com.unity.2d.animation": "5.1.0",
     "com.unity.2d.pixel-perfect": "4.0.1",

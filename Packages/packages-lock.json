@@ -1,11 +1,18 @@
 {
   "dependencies": {
+    "com.indiegabo.glogger": {
+      "version": "git@github.com:indiegabo/GLogger.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c750b1c265aebe410d8adb74ebe42196b8acec62"
+    },
     "com.ricardogodoy.hierarchyseparator": {
       "version": "git@github.com:RicardoQLG/HierarchySeparator.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "1b058989658642ab95873d382ccebcddc4271bac"
+      "hash": "f632c6d09b1d6e26f3b3118cb9f12c9c745692a3"
     },
     "com.unity.2d.animation": {
       "version": "5.1.0",

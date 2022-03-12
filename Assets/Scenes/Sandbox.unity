@@ -199,6 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 551b6a4e6097a5a458051e4d0143782d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BarColor:
+    r: 0.7075472
+    g: 0.09011214
+    b: 0.09011214
+    a: 1
 --- !u!4 &242337602
 Transform:
   m_ObjectHideFlags: 0
@@ -326,9 +331,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_shouldLog: 0
-  m_successColor: {r: 0.16731933, g: 0.754717, b: 0.42883196, a: 1}
-  m_warningColor: {r: 0.754717, g: 0.7350883, b: 0.18155926, a: 1}
-  m_dangerColor: {r: 1, g: 0.3820755, b: 0.3820755, a: 1}
+  m_successColor:
+    r: 0.16731933
+    g: 0.754717
+    b: 0.42883196
+    a: 1
+  m_warningColor:
+    r: 0.754717
+    g: 0.7350883
+    b: 0.18155926
+    a: 1
+  m_dangerColor:
+    r: 1
+    g: 0.3820755
+    b: 0.3820755
+    a: 1
 --- !u!4 &1150553909
 Transform:
   m_ObjectHideFlags: 0
@@ -746,6 +763,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 551b6a4e6097a5a458051e4d0143782d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BarColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 1
 --- !u!4 &2043814449
 Transform:
   m_ObjectHideFlags: 0
@@ -759,6 +781,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2091968428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2091968430}
+  - component: {fileID: 2091968429}
+  m_Layer: 0
+  m_Name: GLog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2091968429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091968428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345582ae19a31ea48b52a965ec13dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_shouldLog: 1
+  m_successColor: {r: 0, g: 1, b: 0, a: 1}
+  m_warningColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_dangerColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!4 &2091968430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091968428}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2138075488
 GameObject:

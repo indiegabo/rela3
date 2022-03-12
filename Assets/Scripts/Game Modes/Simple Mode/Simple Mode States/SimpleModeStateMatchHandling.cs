@@ -36,7 +36,7 @@ namespace IndieGabo.Rela3.GameModes
         {
             base.OnEnter();
             this.matchesHandled = false;
-            GenericLogger.I?.Success($"Handling Matches");
+            // GenericLogger.I?.Success($"Handling Matches");
 
             // Evaluating possible matches. Case matches are found we put them in 
 

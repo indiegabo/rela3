@@ -39,7 +39,8 @@ namespace IndieGabo.Rela3.GameModes
         /// </summary>
         public override void OnEnter()
         {
-            GenericLogger.I?.Warning($"Entered Input Check State");
+
+            // GenericLogger.I?.Warning($"Entered Input Check State");
             this._board.currentMatches.Clear();
             InputHandler.onStartGrab += this.OnGrabStart;
             InputHandler.onFinishedGrab += this.OnGrabFinish;
