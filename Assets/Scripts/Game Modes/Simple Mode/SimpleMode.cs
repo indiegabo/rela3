@@ -5,7 +5,6 @@ namespace IndieGabo.Rela3.GameModes
 {
     public class SimpleMode : Entity<SimpleModeCore>
     {
-
         public List<Match> currentMatches = new List<Match>();
         public SimpleModeStateLoading simpleModeStateLoading;
         public SimpleModeStateInputCheck simpleModeStateInputCheck;
@@ -26,6 +25,5 @@ namespace IndieGabo.Rela3.GameModes
             this.simpleModeStateMatchHandling = new SimpleModeStateMatchHandling(this);
             this.simpleModeStateReordering = new SimpleModeStateReordering(this);
         }
-
     }
 }

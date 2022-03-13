@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "c750b1c265aebe410d8adb74ebe42196b8acec62"
+      "hash": "ce8b982f85fe99e56b1446bdac11b0539fa3a185"
     },
     "com.ricardogodoy.hierarchyseparator": {
       "version": "git@github.com:RicardoQLG/HierarchySeparator.git",
@@ -121,7 +121,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.vscode": {
-      "version": "1.2.4",
+      "version": "1.2.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
