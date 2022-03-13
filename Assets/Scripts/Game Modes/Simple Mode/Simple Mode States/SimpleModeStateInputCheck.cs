@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using IndieGabo.Rela3.StateManagement;
 using System.Threading.Tasks;
 
 namespace IndieGabo.Rela3.GameModes
@@ -39,7 +38,8 @@ namespace IndieGabo.Rela3.GameModes
         /// </summary>
         public override void OnEnter()
         {
-            GenericLogger.I?.Warning($"Entered Input Check State");
+
+            GLog.I?.Warning($"Entered Input Check State");
             this._board.currentMatches.Clear();
             InputHandler.onStartGrab += this.OnGrabStart;
             InputHandler.onFinishedGrab += this.OnGrabFinish;

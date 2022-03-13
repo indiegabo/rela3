@@ -4,7 +4,7 @@ using IndieGabo.Rela3;
 using UnityEditor;
 using UnityEngine;
 
-public class TileLogger : Logger
+public class TileLogger : GLogger
 {
     public static TileLogger I;
 
@@ -12,22 +12,23 @@ public class TileLogger : Logger
     {
         I = this;
     }
+
     public void LogTile(Tile tile, string message = null)
     {
         Debug.Log($"<color={warningHEX}>-------------------</color>");
-        Debug.Log($"<color={whiteHEX}>Tile: </color> <color={successHEX}>[{tile.position.x}][{tile.position.y}]</color>");
-        Debug.Log($"<color={whiteHEX}>Item: </color> <color={successHEX}>{tile.item.name}</color>");
-        Debug.Log($"<color={warningHEX}>-------------------</color>");
+        Debug.Log($"<color={whiteHEX}> {tile.item.name} </color> <color={successHEX}>[{tile.position.x}][{tile.position.y}]</color>");
+        if (message != null)
+            Debug.Log($"<color={whiteHEX}>{message}</color>");
     }
 
 
-    [MenuItem("GameObject/Loggers/Tile")]
+    [MenuItem("GameObject/GLogger/Tile")]
     public static void CreateSeparator(MenuCommand menuCommand)
     {
-        GameObject separator = new GameObject("TileLogger");
-        separator.AddComponent<TileLogger>();
-        GameObjectUtility.SetParentAndAlign(separator, menuCommand.context as GameObject);
-        Undo.RegisterCreatedObjectUndo(separator, "Create " + separator.name);
-        Selection.activeObject = separator;
+        GameObject logger = new GameObject("TileLogger");
+        logger.AddComponent<TileLogger>();
+        GameObjectUtility.SetParentAndAlign(logger, menuCommand.context as GameObject);
+        Undo.RegisterCreatedObjectUndo(logger, "Create " + logger.name);
+        Selection.activeObject = logger;
     }
 }
