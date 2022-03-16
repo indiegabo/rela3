@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "ce8b982f85fe99e56b1446bdac11b0539fa3a185"
+      "hash": "6c47ac06e3f545cbd54392485b5b64a7d7b61704"
     },
     "com.ricardogodoy.hierarchyseparator": {
       "version": "git@github.com:RicardoQLG/HierarchySeparator.git",
@@ -15,7 +15,7 @@
       "hash": "f632c6d09b1d6e26f3b3118cb9f12c9c745692a3"
     },
     "com.unity.2d.animation": {
-      "version": "5.1.0",
+      "version": "5.1.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {

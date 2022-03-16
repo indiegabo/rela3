@@ -143,9 +143,9 @@ namespace IndieGabo.Rela3.GameModes
 
         private bool EvaluateNewMatches()
         {
-            for (int x = 0; x < this._board.rows; x++)
+            for (int x = 0; x < this._board.columns; x++)
             {
-                for (int y = 0; y < this._board.columns; y++)
+                for (int y = 0; y < this._board.rows; y++)
                 {
                     Vector2 pos = new Vector2(x, y);
                     Tile tile = this._board.GetTile(pos);

@@ -4,6 +4,7 @@ using UnityEngine;
 using IA;
 using IndieGabo.Rela3.Items;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace IndieGabo.Rela3
 {
@@ -35,7 +36,7 @@ namespace IndieGabo.Rela3
 
         public void Initialize()
         {
-            for (int x = 0; x < rows; x++)
+            for (int x = 0; x < columns; x++)
             {
                 for (int y = 0; y < rows; y++)
                 {
@@ -102,9 +103,12 @@ namespace IndieGabo.Rela3
 
             List<Tile> path = this.dijkstra.FindPath(from);
 
-            if (path.Count >= 3)
+            List<Tile> matchFromTile = CheckMatch(path);
+
+
+            if (matchFromTile != null)
             {
-                return new Match(path);
+                return new Match(matchFromTile);
             }
             else
             {
@@ -112,6 +116,30 @@ namespace IndieGabo.Rela3
             }
         }
 
+        private List<Tile> CheckMatch(List<Tile> path)
+        {
+            int countX = path.Count(tile => tile.position.x == path[0].position.x) - 1;
+            int countY = path.Count(tile => tile.position.y == path[0].position.y) - 1;
+
+            if (countX >= 2 && countY >= 2)
+            {
+                return path;
+            }
+            else if (countX >= 2)
+            {
+                // return all from x
+                return path.Where(tile => tile.position.x == path[0].position.x).ToList();
+            }
+            else if (countY >= 2)
+            {
+                // return all from Y
+                return path.Where(tile => tile.position.y == path[0].position.y).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         public void EvaluateMatch(Tile tile)
         {
@@ -119,7 +147,6 @@ namespace IndieGabo.Rela3
 
             if (match == null)
             {
-                TileLogger.I?.LogTile(tile, $"No Matches for this tile");
                 return;
             }
 

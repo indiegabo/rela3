@@ -4,9 +4,9 @@ using IndieGabo.Rela3;
 using UnityEditor;
 using UnityEngine;
 
-public class TileLogger : GLogger
+public class Rela3Logger : GLogger
 {
-    public static TileLogger I;
+    public static Rela3Logger I;
 
     protected virtual void Awake()
     {
@@ -21,12 +21,25 @@ public class TileLogger : GLogger
             Debug.Log($"<color={whiteHEX}>{message}</color>");
     }
 
+    public void LogPath(List<Tile> path, string message = null)
+    {
+        Debug.Log($"<color={successHEX}>------ PATH ---------</color>");
+
+        foreach (Tile tile in path)
+        {
+            LogTile(tile);
+        }
+
+        if (message != null)
+            Debug.Log($"<color={whiteHEX}>{message}</color>");
+    }
+
 
     [MenuItem("GameObject/GLogger/Tile")]
     public static void CreateSeparator(MenuCommand menuCommand)
     {
-        GameObject logger = new GameObject("TileLogger");
-        logger.AddComponent<TileLogger>();
+        GameObject logger = new GameObject("Rela3Logger");
+        logger.AddComponent<Rela3Logger>();
         GameObjectUtility.SetParentAndAlign(logger, menuCommand.context as GameObject);
         Undo.RegisterCreatedObjectUndo(logger, "Create " + logger.name);
         Selection.activeObject = logger;

@@ -37,7 +37,7 @@ namespace IndieGabo.Rela3.Items
             this._currentBoard = board;
             for (int y = 0; y < board.rows; y++)
             {
-                for (int x = 0; x < board.rows; x++)
+                for (int x = 0; x < board.columns; x++)
                 {
                     this.FirstSpawnRandomItem(board.GetTile(new Vector2(x, y)));
                     yield return new WaitForSeconds(this._populateSpawnDelay);
